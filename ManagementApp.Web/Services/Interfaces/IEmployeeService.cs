@@ -8,5 +8,7 @@ namespace ManagementApp.Web.Services.Interfaces
         IEnumerable<Employee> GetEmployees();
         Employee GetEmployeeById(int employeeId);
         void DeleteEmployee(int employeeId);
+        void AddEmployee(Employee employee);
+        void UpdateEmployee(Employee employee);
     }
 }

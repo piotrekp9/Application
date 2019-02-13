@@ -1,9 +1,10 @@
 ﻿using ManagementApp.Web.Data.Enums;
+using ManagementApp.Web.Data.Models;
 using System.Collections.Generic;
 
-namespace ManagementApp.Web.Data.Models
+namespace ManagementApp.Web.ViewModel
 {
-    public class Employee
+    public class EmployeeViewModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

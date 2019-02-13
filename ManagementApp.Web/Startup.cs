@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using ManagementApp.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ManagementApp.Web.Services.Interfaces;
+using ManagementApp.Web.Services;
 
 namespace ManagementApp.Web
 {
@@ -28,6 +30,8 @@ namespace ManagementApp.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddTransient<IEmployeeService, EmployeeService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

@@ -10,10 +10,7 @@ namespace ManagementApp.Web.Services
     {
         ApplicationDbContext context;
 
-        public EmployeeService(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
+        public EmployeeService(ApplicationDbContext context) => this.context = context;
 
         public IEnumerable<Employee> GetEmployees() => context.Employees.ToList();
 
@@ -26,5 +23,8 @@ namespace ManagementApp.Web.Services
             context.SaveChanges();
         }
 
+        public void AddEmployee(Employee employee) => context.Add(employee);
+
+        public void UpdateEmployee(Employee employee) => context.Update(employee);
     }
 }

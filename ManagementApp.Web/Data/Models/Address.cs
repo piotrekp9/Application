@@ -6,7 +6,7 @@ namespace ManagementApp.Web.Data.Models
     public class Address
     {
         public string Street { get; set; }
-        public int PostalCode { get; set; }
+        public string PostalCode { get; set; }
         public string City { get; set; }
     }
 }

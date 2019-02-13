@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ManagementApp.Web.ViewModel.EmployeeViewModel>
+
+
+<h2>Lista Pracowników</h2>
+
+<p>
+    <a asp-action="Create">Dodaj nowego pracownika</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeType)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => employee.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.EmployeeType)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

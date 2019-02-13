@@ -5,7 +5,7 @@ namespace ManagementApp.Web.Data.Models
     [Owned]
     public class ContactInfo
     {
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string Email { get; set; }
     }
 }
