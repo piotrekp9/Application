@@ -9,7 +9,7 @@ namespace ManagementApp.Web.Data.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public EmployeeType EmployeeType { get; set; }
-
+        public bool IsOccupied { get; set; }
         public Address Address { get; set; }
         public ContactInfo ContactInfo { get; set; }
 

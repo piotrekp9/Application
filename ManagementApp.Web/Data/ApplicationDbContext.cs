@@ -20,14 +20,18 @@ namespace ManagementApp.Web.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //Opisac EmployeOrder aby działao Index
+            builder.Entity<EmployeesOrders>().HasKey(eo => new { eo.EmployeeId, eo.OrderId });
+            builder.Entity<EmployeesOrders>().HasOne(eo => eo.Employee).WithMany(employee => employee.EmployeesOrders).HasForeignKey(eo => eo.EmployeeId);
+            builder.Entity<EmployeesOrders>().HasOne(eo => eo.Order).WithMany(order => order.EmployeesOrders).HasForeignKey(eo => eo.OrderId);
+
+
 
             SeedData(builder);
         }
 
         private void SeedData(ModelBuilder builder)
         {
-            var Employees = new Employee[]
+            var employeesList = new Employee[]
             {
                 new Employee()
                 {
@@ -36,11 +40,12 @@ namespace ManagementApp.Web.Data
                     LastName = "Duda",
                     Address = new Address(){City="Warszawa", PostalCode="00-000", Street="W dupie"},
                     ContactInfo = new ContactInfo(){Email ="adnrzej69@gmail.com", PhoneNumber="0700123456"},
-                    EmployeeType = EmployeeType.Electrician
+                    EmployeeType = EmployeeType.Electrician,
+                    IsOccupied = false
                 }
             };
 
-            builder.Entity<Employee>().HasData(Employees);
+            builder.Entity<Employee>().HasData(employeesList);
         }
     }
 }
