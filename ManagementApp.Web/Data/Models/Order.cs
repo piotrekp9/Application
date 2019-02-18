@@ -9,7 +9,6 @@ namespace ManagementApp.Web.Data.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public OrderType OrderType {get;set;}
         public OrderStatus OrderStatus { get; set; }
         public OrderPriority OrderPriority { get; set; }
         public DateTime StartDate { get; set; }
@@ -24,6 +23,9 @@ namespace ManagementApp.Web.Data.Models
 
         public int ProtocolId { get; set; }
         public Protocol Protocol { get; set; }
+
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
         public ICollection<EmployeesOrders> EmployeesOrders { get; set; }
     }

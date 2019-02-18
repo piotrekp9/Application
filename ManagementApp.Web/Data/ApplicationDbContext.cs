@@ -17,6 +17,8 @@ namespace ManagementApp.Web.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Protocol> Protocols { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,7 +26,7 @@ namespace ManagementApp.Web.Data
             builder.Entity<EmployeesOrders>().HasOne(eo => eo.Employee).WithMany(employee => employee.EmployeesOrders).HasForeignKey(eo => eo.EmployeeId);
             builder.Entity<EmployeesOrders>().HasOne(eo => eo.Order).WithMany(order => order.EmployeesOrders).HasForeignKey(eo => eo.OrderId);
 
-
+            builder.Entity
 
             SeedData(builder);
         }

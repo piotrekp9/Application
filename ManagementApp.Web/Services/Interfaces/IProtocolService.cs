@@ -1,16 +1,14 @@
-﻿using System;
+﻿using ManagementApp.Web.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ManagementApp.Web.Services.Interfaces
 {
     public interface IProtocolService
     {
-        IEnumerable<Employee> GetEmployees();
-        Employee GetEmployeeById(int employeeId);
-        void DeleteEmployee(int employeeId);
-        void AddEmployee(Employee employee);
-        void UpdateEmployee(Employee employee);
+        IEnumerable<Protocol> GetProtocols();
+        Protocol GetProtocolById(int protocolId);
+        void DeleteProtocol(int protocolId);
+        void AddProtocol(Protocol Protocol);
+        void UpdateProtocol(Protocol Protocol);
     }
 }

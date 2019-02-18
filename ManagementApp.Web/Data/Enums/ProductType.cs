@@ -1,6 +1,6 @@
 ﻿namespace ManagementApp.Web.Data.Enums
 {
-    public enum OrderType
+    public enum ProductType
     {
         electric = 0,
         instalation,

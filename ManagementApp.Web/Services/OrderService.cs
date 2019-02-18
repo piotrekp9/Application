@@ -65,7 +65,6 @@ namespace ManagementApp.Web.Services
             orderToUpdate.AcutalFinishDate = order.AcutalFinishDate;
             orderToUpdate.OrderPriority = order.OrderPriority;
             orderToUpdate.OrderStatus = order.OrderStatus;
-            orderToUpdate.OrderType = order.OrderType;
             orderToUpdate.PlannedFinishDate = order.PlannedFinishDate;
             orderToUpdate.StartDate = order.StartDate;
 

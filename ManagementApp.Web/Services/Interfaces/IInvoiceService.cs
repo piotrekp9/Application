@@ -1,16 +1,14 @@
-﻿using System;
+﻿using ManagementApp.Web.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ManagementApp.Web.Services.Interfaces
 {
     public interface IInvoiceService
     {
-        IEnumerable<Employee> GetEmployees();
-        Employee GetEmployeeById(int employeeId);
-        void DeleteEmployee(int employeeId);
-        void AddEmployee(Employee employee);
-        void UpdateEmployee(Employee employee);
+        IEnumerable<Invoice> GetInvoices();
+        Invoice GetInvoiceById(int invoiceId);
+        void DeleteInvoice(int invoiceId);
+        void AddInvoice(Invoice Invoice);
+        void UpdateInvoice(Invoice Invoice);
     }
 }
