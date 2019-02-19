@@ -20,7 +20,7 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(employeeService.GetEmployees());
+            return View(EmployeeMapper.MapToViewModel(employeeService.GetEmployees()));
         }
 
         [HttpPost]

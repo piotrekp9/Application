@@ -4,14 +4,16 @@ using ManagementApp.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ManagementApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190219192004_migracja2")]
+    partial class migracja2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -416,7 +418,7 @@ namespace ManagementApp.Web.Data.Migrations
                     b.HasOne("ManagementApp.Web.Data.Models.Client", "Client")
                         .WithMany("Invoices")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ManagementApp.Web.Data.Models.Order", b =>
@@ -424,17 +426,17 @@ namespace ManagementApp.Web.Data.Migrations
                     b.HasOne("ManagementApp.Web.Data.Models.Client", "Client")
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ManagementApp.Web.Data.Models.Employee", "Employee")
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ManagementApp.Web.Data.Models.Invoice", "Invoice")
                         .WithOne("Order")
                         .HasForeignKey("ManagementApp.Web.Data.Models.Order", "InvoiceId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ManagementApp.Web.Data.Models.Product", "Product")
                         .WithMany()
@@ -447,12 +449,12 @@ namespace ManagementApp.Web.Data.Migrations
                     b.HasOne("ManagementApp.Web.Data.Models.Employee", "Employee")
                         .WithMany("Protocols")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ManagementApp.Web.Data.Models.Order", "Order")
                         .WithOne("Protocol")
                         .HasForeignKey("ManagementApp.Web.Data.Models.Protocol", "OrderId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

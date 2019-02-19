@@ -39,7 +39,6 @@ namespace ManagementApp.Web.Services
         public Protocol GetProtocolById(int protocolId)
         {
             return context.Protocols
-                .Include(protocol => protocol.Client)
                 .Include(protocol => protocol.Employee)
                 .Include(protocol => protocol.Order)
                 .FirstOrDefault(protocol => protocol.Id == protocolId);
@@ -48,7 +47,6 @@ namespace ManagementApp.Web.Services
         public IEnumerable<Protocol> GetProtocols()
         {
             return context.Protocols
-                .Include(protocol => protocol.Client)
                 .Include(protocol => protocol.Employee)
                 .Include(protocol => protocol.Order)
                 .ToList();

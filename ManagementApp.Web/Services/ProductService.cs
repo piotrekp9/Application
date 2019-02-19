@@ -47,7 +47,7 @@ namespace ManagementApp.Web.Services
             productToUpdate.Name = product.Name;
             productToUpdate.Description = product.Description;
             productToUpdate.Price = product.Price;
-            productToUpdate.ProductType = product.ProductType;
+            //productToUpdate.ProductType = product.ProductType
 
             context.SaveChanges();
         }

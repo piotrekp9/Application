@@ -41,6 +41,7 @@ namespace ManagementApp.Web.Services
                 .Include(orders => orders.Client)
                 .Include(orders => orders.Invoice)
                 .Include(orders => orders.Protocol)
+                .Include(order => order.Employee)
                 .FirstOrDefault(order => order.Id == orderId);
         }
 
@@ -50,7 +51,7 @@ namespace ManagementApp.Web.Services
                 .Include(order => order.Client)
                 .Include(order => order.Invoice)
                 .Include(order => order.Protocol)
-                .Include(order => order.EmployeesOrders)
+                .Include(order => order.Employee)
                 .ToList();
         }
 

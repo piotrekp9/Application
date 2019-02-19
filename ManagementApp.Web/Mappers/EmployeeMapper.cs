@@ -1,4 +1,6 @@
-﻿using ManagementApp.Web.Data.Models;
+﻿using System;
+using System.Collections.Generic;
+using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
 
 namespace ManagementApp.Web.Mappers
@@ -12,10 +14,21 @@ namespace ManagementApp.Web.Mappers
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                Address = employee.Address,
-                ContactInfo = employee.ContactInfo,
-                EmployeeType = employee.EmployeeType
+                //Address = employee.Address,
+                //ContactInfo = employee.ContactInfo,
             };
+        }
+
+        public static IEnumerable<EmployeeViewModel> MapToViewModel(IEnumerable<Employee> employees)
+        {
+            var result = new List<EmployeeViewModel>();
+
+            foreach (Employee employee in employees)
+            {
+                result.Add(MapToViewModel(employee));
+            }
+
+            return result;
         }
 
         public static Employee MapToDomainModel(EmployeeViewModel employeeViewModel)
@@ -24,9 +37,8 @@ namespace ManagementApp.Web.Mappers
             {
                 FirstName = employeeViewModel.FirstName,
                 LastName = employeeViewModel.LastName,
-                Address = employeeViewModel.Address,
-                ContactInfo = employeeViewModel.ContactInfo,
-                EmployeeType = employeeViewModel.EmployeeType
+                //Address = employeeViewModel.Address,
+                //ContactInfo = employeeViewModel.ContactInfo,
             };
         }
     }

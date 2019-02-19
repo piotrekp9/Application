@@ -1,6 +1,5 @@
 ﻿using ManagementApp.Web.Data.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace ManagementApp.Web.Data.Models
 {
@@ -21,12 +20,13 @@ namespace ManagementApp.Web.Data.Models
         public int ClientId { get; set; }
         public Client Client { get; set; }
 
-        public int ProtocolId { get; set; }
+        public int? ProtocolId { get; set; }
         public Protocol Protocol { get; set; }
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
 
-        public ICollection<EmployeesOrders> EmployeesOrders { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

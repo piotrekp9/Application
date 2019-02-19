@@ -1,11 +1,11 @@
 ﻿namespace ManagementApp.Web.Data.Models
 {
-    public class EmployeesOrders
+    public class EmployeesQualifications
     {
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
-
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+
+        public int QualificationId { get; set; }
+        public Qualification Qualification { get; set; }
     }
 }

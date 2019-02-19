@@ -14,7 +14,7 @@ namespace ManagementApp.Web.Services
 
         public EmployeeService(ApplicationDbContext context) => this.context = context;
 
-        public IEnumerable<Employee> GetEmployees() => context.Employees.Include(employee => employee.EmployeesOrders).ToList();
+        public IEnumerable<Employee> GetEmployees() => context.Employees.Include(employee => employee.EmployeesQualifications).ToList();
 
         public Employee GetEmployeeById(int employeeId) => context.Employees.Find(employeeId);
 
@@ -47,9 +47,9 @@ namespace ManagementApp.Web.Services
             employeeToUpdate.FirstName = employee.FirstName;
             employeeToUpdate.LastName = employee.LastName;
             employeeToUpdate.IsOccupied = employee.IsOccupied;
-            employeeToUpdate.EmployeeType = employee.EmployeeType;
-            employeeToUpdate.Address = employee.Address;
-            employeeToUpdate.ContactInfo = employee.ContactInfo;
+            //employeeToUpdate.EmployeeType = employee.EmployeeType;
+            //employeeToUpdate.Address = employee.Address;
+            //employeeToUpdate.ContactInfo = employee.ContactInfo;
 
             context.SaveChanges();
         }
