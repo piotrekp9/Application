@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ManagementApp.Web.ViewModel
+﻿namespace ManagementApp.Web.ViewModel
 {
     public class EmployeeViewModel
     {

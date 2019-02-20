@@ -56,7 +56,6 @@ namespace ManagementApp.Web.Services
             if (protocolToUpdate == null) throw new ArgumentException($"Cannot update protocol of ID:{protocol.Id}");
 
             protocolToUpdate.Name = protocol.Name;
-            protocolToUpdate.Title = protocol.Title;
             protocolToUpdate.Description = protocol.Description;
 
             context.SaveChanges();

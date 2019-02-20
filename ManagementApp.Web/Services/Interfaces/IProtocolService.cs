@@ -8,7 +8,7 @@ namespace ManagementApp.Web.Services.Interfaces
         IEnumerable<Protocol> GetProtocols();
         Protocol GetProtocolById(int protocolId);
         void DeleteProtocol(int protocolId);
-        void AddProtocol(Protocol Protocol);
-        void UpdateProtocol(Protocol Protocol);
+        void AddProtocol(Protocol protocol);
+        void UpdateProtocol(Protocol protocol);
     }
 }
