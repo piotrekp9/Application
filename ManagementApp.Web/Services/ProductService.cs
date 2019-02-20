@@ -42,12 +42,12 @@ namespace ManagementApp.Web.Services
         {
             var productToUpdate = context.Products.Find(product.Id);
 
-            if (product == null) throw new ArgumentException($"Cannot update Product of ID:{product.Id}");
+            if (productToUpdate == null) throw new ArgumentException($"Cannot update Product of ID:{product.Id}");
 
             productToUpdate.Name = product.Name;
             productToUpdate.Description = product.Description;
             productToUpdate.Price = product.Price;
-            //productToUpdate.ProductType = product.ProductType
+            productToUpdate.QualificationType = product.QualificationType;
 
             context.SaveChanges();
         }

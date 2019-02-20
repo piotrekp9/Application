@@ -12,10 +12,7 @@ namespace ManagementApp.Web.Services
     {
         private readonly ApplicationDbContext context;
 
-        public ProtocolService(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
+        public ProtocolService(ApplicationDbContext context) => this.context = context;
 
         public void AddProtocol(Protocol protocol)
         {

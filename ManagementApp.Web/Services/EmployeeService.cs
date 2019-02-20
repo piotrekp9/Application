@@ -47,9 +47,11 @@ namespace ManagementApp.Web.Services
             employeeToUpdate.FirstName = employee.FirstName;
             employeeToUpdate.LastName = employee.LastName;
             employeeToUpdate.IsOccupied = employee.IsOccupied;
-            //employeeToUpdate.EmployeeType = employee.EmployeeType;
-            //employeeToUpdate.Address = employee.Address;
-            //employeeToUpdate.ContactInfo = employee.ContactInfo;
+            employeeToUpdate.City = employee.City;
+            employeeToUpdate.Email = employee.Email;
+            employeeToUpdate.PhoneNumber = employee.PhoneNumber;
+            employeeToUpdate.PostalCode = employee.PostalCode;
+            employeeToUpdate.Street = employee.Street;
 
             context.SaveChanges();
         }

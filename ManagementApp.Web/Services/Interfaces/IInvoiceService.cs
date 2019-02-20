@@ -8,7 +8,7 @@ namespace ManagementApp.Web.Services.Interfaces
         IEnumerable<Invoice> GetInvoices();
         Invoice GetInvoiceById(int invoiceId);
         void DeleteInvoice(int invoiceId);
-        void AddInvoice(Invoice Invoice);
-        void UpdateInvoice(Invoice Invoice);
+        void AddInvoice(Invoice invoice);
+        void UpdateInvoice(Invoice invoice);
     }
 }

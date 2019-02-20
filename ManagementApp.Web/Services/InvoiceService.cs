@@ -17,13 +17,16 @@ namespace ManagementApp.Web.Services
         public IEnumerable<Invoice> GetInvoices()
         {
             return context.Invoices
-                .Include(invoice => invoice.Order).ToList();
+                .Include(invoice => invoice.Order)
+                .Include(invoice => invoice.Order)
+                .ToList();
         }
 
         public Invoice GetInvoiceById(int invoiceId)
         {
             return context.Invoices
                 .Include(invoice => invoice.Order)
+                .Include(invoice => invoice.Client)
                 .FirstOrDefault(invoice => invoice.Id == invoiceId);
         }
 
@@ -48,12 +51,19 @@ namespace ManagementApp.Web.Services
 
         public void UpdateInvoice(Invoice invoice)
         {
-            //tu dodac gdy beda dane na temat faktur
             var invoiceToUpdate = context.Invoices.Find(invoice.Id);
 
             if (invoiceToUpdate == null) throw new ArgumentException($"There is no invoice of ID={invoice.Id}, that could be updated");
 
-            //Dodac aktualizacje propek jak sie pojawia
+            invoiceToUpdate.AccountNumber = invoice.AccountNumber;
+            invoiceToUpdate.DateOfIssue = invoice.DateOfIssue;
+            invoiceToUpdate.Description = invoice.Description;
+            invoiceToUpdate.InvoiceNumber = invoice.InvoiceNumber;
+            invoiceToUpdate.PaymentType = invoice.PaymentType;
+            invoiceToUpdate.PaymentWithoutTax = invoice.PaymentWithoutTax;
+            invoiceToUpdate.PaymentWithTax = invoice.PaymentWithTax;
+            invoiceToUpdate.TaxPayment = invoice.TaxPayment;
+            invoiceToUpdate.TaxRate = invoice.TaxRate;
 
             context.SaveChanges();
         }

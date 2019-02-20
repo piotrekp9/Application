@@ -14,7 +14,6 @@ namespace ManagementApp.Web.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
         public DbSet<EmployeesQualifications> EmployeesQualifications { get; set; }
-        //public DbSet<EmployeesOrders> EmployeesOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
@@ -24,9 +23,7 @@ namespace ManagementApp.Web.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //builder.Entity<EmployeesOrders>().HasKey(eo => new { eo.EmployeeId, eo.OrderId });
-            //builder.Entity<EmployeesOrders>().HasOne(eo => eo.Employee).WithMany(employee => employee.EmployeesOrders).HasForeignKey(eo => eo.EmployeeId);
-            //builder.Entity<EmployeesOrders>().HasOne(eo => eo.Order).WithMany(order => order.EmployeesOrders).HasForeignKey(eo => eo.OrderId);
+
             builder.Entity<Order>().HasOne(order => order.Protocol).WithOne(protocol => protocol.Order).HasForeignKey<Protocol>(p => p.OrderId).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<Invoice>().HasOne(invoice => invoice.Order).WithOne(order => order.Invoice).HasForeignKey<Order>(i => i.InvoiceId).OnDelete(DeleteBehavior.SetNull);
 

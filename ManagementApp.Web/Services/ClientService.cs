@@ -60,8 +60,13 @@ namespace ManagementApp.Web.Services
             clientToUpdate.NIP = client.NIP;
             clientToUpdate.PESEL = client.PESEL;
             clientToUpdate.REGON = client.REGON;
-            //clientToUpdate.Address = client.Address;
-            //clientToUpdate.ContactInfo = client.ContactInfo;
+            clientToUpdate.City = client.City;
+            clientToUpdate.Email = client.Email;
+            clientToUpdate.Street = client.Street;
+            clientToUpdate.PostalCode = client.PostalCode;
+            clientToUpdate.PhoneNumber = client.PhoneNumber;
+
+            context.SaveChanges();
         }
     }
 }
