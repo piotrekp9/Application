@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using ManagementApp.Web.Data.Enums;
+using System;
 
 namespace ManagementApp.Web.Data.Models
 {

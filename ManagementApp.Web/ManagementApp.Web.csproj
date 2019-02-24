@@ -11,4 +11,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.7" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Client\" />
+    <Folder Include="Views\Invoice\" />
+    <Folder Include="Views\Qualification\" />
+    <Folder Include="Views\Order\" />
+    <Folder Include="Views\Product\" />
+    <Folder Include="Views\Protocol\" />
+  </ItemGroup>
+
 </Project>

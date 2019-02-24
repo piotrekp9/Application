@@ -6,7 +6,7 @@ namespace ManagementApp.Web.Services.Interfaces
     public interface IClientService
     {
         IEnumerable<Client> GetClients();
-        Client GetClientId(int clientId);
+        Client GetClientById(int clientId);
         void DeleteClient(int clientId);
         void AddClient(Client client);
         void UpdateClient(Client client);

@@ -12,16 +12,10 @@ namespace ManagementApp.Web.Controllers
     {
         private IEmployeeService employeeService;
 
-        public EmployeeController(IEmployeeService employeeService)
-        {
-            this.employeeService = employeeService;
-        }
+        public EmployeeController(IEmployeeService employeeService) => this.employeeService = employeeService;
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            return View(EmployeeMapper.MapToViewModel(employeeService.GetEmployees()));
-        }
+        public IActionResult Index() => View(EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees()));
 
         [HttpPost]
         public IActionResult Create(EmployeeViewModel employee)
@@ -81,9 +75,6 @@ namespace ManagementApp.Web.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

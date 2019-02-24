@@ -34,7 +34,7 @@ namespace ManagementApp.Web.Services
             context.SaveChanges();
         }
 
-        public Client GetClientId(int clientId)
+        public Client GetClientById(int clientId)
         {
             return context.Clients
                 .Include(client => client.Orders).ThenInclude(order => order)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
 
@@ -14,12 +13,16 @@ namespace ManagementApp.Web.Mappers
                 Id = employee.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
-                //Address = employee.Address,
-                //ContactInfo = employee.ContactInfo,
+                City = employee.City,
+                Email = employee.Email,
+                IsOccupied = employee.IsOccupied,
+                PhoneNumber = employee.PhoneNumber,
+                PostalCode = employee.PostalCode,
+                Street = employee.Street,
             };
         }
 
-        public static IEnumerable<EmployeeViewModel> MapToViewModel(IEnumerable<Employee> employees)
+        public static IEnumerable<EmployeeViewModel> MapManyToViewModel(IEnumerable<Employee> employees)
         {
             var result = new List<EmployeeViewModel>();
 
@@ -37,8 +40,12 @@ namespace ManagementApp.Web.Mappers
             {
                 FirstName = employeeViewModel.FirstName,
                 LastName = employeeViewModel.LastName,
-                //Address = employeeViewModel.Address,
-                //ContactInfo = employeeViewModel.ContactInfo,
+                City = employeeViewModel.City,
+                Email = employeeViewModel.Email,
+                IsOccupied = employeeViewModel.IsOccupied,
+                PhoneNumber = employeeViewModel.PhoneNumber,
+                PostalCode = employeeViewModel.PostalCode,
+                Street = employeeViewModel.Street,
             };
         }
     }
