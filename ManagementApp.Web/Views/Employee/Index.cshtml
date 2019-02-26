@@ -3,25 +3,46 @@
 
 <h2>Lista Pracowników</h2>
 
-<p>
-    <a asp-action="Create">Dodaj nowego pracownika</a>
-</p>
+<a asp-action="Create"="/Employee/Create">Dodaj nowego pracownika</a>
+<br />
+@Html.TextBox("SearchEmployee", null, new {@PlaceHolder = "Wyszukaj..."})
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                Imie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                Nazwisko
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.EmployeeType)
-            </th>*@
+            <th>
+                Zajęty
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Nr. telefonu
+            </th>
+            <th>
+                Ulica
+            </th>
+            <th>
+                Miasto
+            </th>
+            <th>
+                Kod pocztowy
+            </th>
+            <th>
+                Edytuj
+            </th>
+            <th>
+                Usuń
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,9 +58,30 @@
             <td>
                 @Html.DisplayFor(modelItem => employee.LastName)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => employee.EmployeeType)
-            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => employee.IsOccupied)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.PostalCode)
+            </td>
+            <td>
+                <button asp-action="Details">Edytuj</button>
+            </td>
+            <td>
+                <button asp-action="Delete">Usuń</button>
+            </td>
         </tr>
         }
     </tbody>

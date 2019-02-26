@@ -17,6 +17,9 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Index() => View(EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees()));
 
+        [HttpGet]
+        public IActionResult Create() => View();
+
         [HttpPost]
         public IActionResult Create(EmployeeViewModel employee)
         {
@@ -37,7 +40,7 @@ namespace ManagementApp.Web.Controllers
         {
             try
             {
-                return View(employeeService.GetEmployeeById(employeeId));
+                return View("Details", employeeService.GetEmployeeById(employeeId));
 
             }
             catch (Exception ex)

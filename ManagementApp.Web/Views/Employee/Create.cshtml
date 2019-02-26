@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Dodaj nowego pracownika";
+}
+
+<h2>Dodaj nowego pracownika</h2>
+
+<div class="form-group">
+    <form asp-action="Create" method="post">
+        <div>
+            <label>Imię</label>
+            <br />
+            @Html.TextBox("NameTextBox", null, new { @PlaceHolder = "Imię pracownika" })
+        </div>
+    </form>
+</div>

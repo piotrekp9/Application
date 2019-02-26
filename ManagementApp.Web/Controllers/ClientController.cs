@@ -37,7 +37,7 @@ namespace ManagementApp.Web.Controllers
         {
             try
             {
-                return View(clientService.GetClientById(clientId));
+                return View(ClientMapper.MapToViewModel(clientService.GetClientById(clientId)));
 
             }
             catch (Exception ex)

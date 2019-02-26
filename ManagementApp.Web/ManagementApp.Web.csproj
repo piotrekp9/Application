@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Views\Client\" />
     <Folder Include="Views\Invoice\" />
     <Folder Include="Views\Qualification\" />

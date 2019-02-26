@@ -32,6 +32,12 @@ namespace ManagementApp.Web
             });
 
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IInvoiceService, InvoiceService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProtocolService, ProtocolService>();
+            services.AddTransient<IQualificationService, QualificationService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
