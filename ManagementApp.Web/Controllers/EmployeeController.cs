@@ -10,7 +10,7 @@ using System.Linq;
 namespace ManagementApp.Web.Controllers
 {
     public class EmployeeController : Controller
-    {1111111111111111111111111111111111111111111111111111111111111111
+    {
         private IEmployeeService employeeService;
 
         public EmployeeController(IEmployeeService employeeService) => this.employeeService = employeeService;
@@ -33,9 +33,10 @@ namespace ManagementApp.Web.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeViewModel employee)
         {
-            if (employee.Id < 1) return View();
+            if (!ModelState.IsValid) return View(employee);
             try
             {
+
                 employeeService.AddEmployee(EmployeeMapper.MapToDomainModel(employee));
 
                 return RedirectToAction(nameof(Index));
@@ -44,15 +45,17 @@ namespace ManagementApp.Web.Controllers
             {
                 return BadRequest(ex);
             }
+
+            return View(employee);
         }
 
         [HttpGet]
         public IActionResult Details(int employeeId)
         {
+            if (employeeId < 1) return View();
             try
             {
-                return View("Details", employeeService.GetEmployeeById(employeeId));
-
+                return View("Details", EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(employeeId)));
             }
             catch (Exception ex)
             {
@@ -60,7 +63,7 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(EmployeeViewModel employee)
         {
             try
