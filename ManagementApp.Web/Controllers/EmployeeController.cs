@@ -5,17 +5,27 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
     public class EmployeeController : Controller
-    {
+    {1111111111111111111111111111111111111111111111111111111111111111
         private IEmployeeService employeeService;
 
         public EmployeeController(IEmployeeService employeeService) => this.employeeService = employeeService;
 
         [HttpGet]
-        public IActionResult Index() => View(EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees()));
+        public IActionResult Index(string filter)
+        {
+            var employees = EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees()).ToList();
+            if(string.IsNullOrEmpty(filter)) return View(employees);
+            
+            return View(
+                employees.Where(employee =>
+                employee.FirstName.ToLower().Contains(filter.ToLower()) ||
+                employee.LastName.ToLower().Contains(filter.ToLower())).ToList());
+        }
 
         [HttpGet]
         public IActionResult Create() => View();
@@ -23,6 +33,7 @@ namespace ManagementApp.Web.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeViewModel employee)
         {
+            if (employee.Id < 1) return View();
             try
             {
                 employeeService.AddEmployee(EmployeeMapper.MapToDomainModel(employee));
