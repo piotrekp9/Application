@@ -85,9 +85,9 @@
                     @Html.DisplayFor(modelItem => employee.PostalCode)
                 </td>
                 <td>
-                    <form action="Details" method="get">
-                        <button asp-action="Details">                        
-                            @Html.ActionLink("Edytuj", "Details", "Employee", new {Id = employee.Id})
+                    <form asp-action="Details" method="get">
+                        <button type="submit" asp-action="Details" asp-route-id="@employee.Id" name="Id">
+                            Edytuj
                         </button>
                     </form>
                 </td>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ManagementApp.Web.ViewModel
 {
@@ -28,5 +29,9 @@ namespace ManagementApp.Web.ViewModel
         [Required]
         [StringLength(255)]
         public string Email { get; set; }
+
+        public IList<string> Qualifictaions { get; set; }
+        public IList<string> Orders { get; set; }
+        public IList<string> Protocols { get; set; }
     }
 }

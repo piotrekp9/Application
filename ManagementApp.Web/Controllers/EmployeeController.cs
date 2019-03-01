@@ -45,17 +45,15 @@ namespace ManagementApp.Web.Controllers
             {
                 return BadRequest(ex);
             }
-
-            return View(employee);
         }
 
         [HttpGet]
         public IActionResult Details(int employeeId)
         {
-            if (employeeId < 1) return View();
+            if (employeeId < 1) return BadRequest(employeeId);
             try
             {
-                return View("Details", EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(employeeId)));
+                return View(EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(employeeId)));
             }
             catch (Exception ex)
             {
