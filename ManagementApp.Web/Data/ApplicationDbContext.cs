@@ -31,6 +31,7 @@ namespace ManagementApp.Web.Data
             builder.Entity<Invoice>().HasOne(invoice => invoice.Order).WithOne(order => order.Invoice).HasForeignKey<Order>(i => i.InvoiceId).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<Invoice>().Property(invoice => invoice.InvoiceNumber).HasMaxLength(11);
             builder.Entity<Invoice>().Property(invoice => invoice.AccountNumber).HasMaxLength(26);
+            builder.Entity<Invoice>().Property(invoice => invoice.Description).HasMaxLength(500);
             builder.Entity<Invoice>().Property(invoice => invoice.PaymentWithoutTax).HasColumnType("decimal(8,2)");
             builder.Entity<Invoice>().Property(invoice => invoice.PaymentWithTax).HasColumnType("decimal(8,2)");
             builder.Entity<Invoice>().Property(invoice => invoice.TaxPayment).HasColumnType("decimal(8,2)");
@@ -39,7 +40,7 @@ namespace ManagementApp.Web.Data
             builder.Entity<Client>().HasMany(client => client.Invoices).WithOne(invoice => invoice.Client).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<Client>().HasMany(client => client.Orders).WithOne(order => order.Client).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<Client>().Property(client => client.City).HasMaxLength(30);
-            builder.Entity<Client>().Property(client => client.PostalCode).HasMaxLength(5);
+            builder.Entity<Client>().Property(client => client.PostalCode).HasMaxLength(6);
             builder.Entity<Client>().Property(client => client.PESEL).HasMaxLength(11);
             builder.Entity<Client>().Property(client => client.REGON).HasMaxLength(14);
             builder.Entity<Client>().Property(client => client.NIP).HasMaxLength(10);

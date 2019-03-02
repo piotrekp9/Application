@@ -5,6 +5,7 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
@@ -15,11 +16,23 @@ namespace ManagementApp.Web.Controllers
         public InvoiceController(IInvoiceService invoiceService) => this.invoiceService = invoiceService;
 
         [HttpGet]
-        public IActionResult Index() => View(InvoiceMapper.MapManyToViewModel(invoiceService.GetInvoices()));
+        public IActionResult Index(string filter)
+        {
+            var invoices = InvoiceMapper.MapManyToViewModel(invoiceService.GetInvoices());
+            if(string.IsNullOrEmpty(filter)) return View(invoices);
+
+            return View(
+                invoices.Where(invoice =>
+                invoice.InvoiceNumber.ToString().Contains(filter)));
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(InvoiceViewModel client)
         {
+            if (!ModelState.IsValid) return BadRequest();
             try
             {
                 invoiceService.AddInvoice(InvoiceMapper.MapToDomainModel(client));
@@ -35,6 +48,7 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(int invoiceId)
         {
+            if (invoiceId < 1) return BadRequest();
             try
             {
                 return View(invoiceService.GetInvoiceById(invoiceId));
@@ -46,9 +60,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(InvoiceViewModel invoice)
         {
+            if (!ModelState.IsValid) return BadRequest();
             try
             {
                 invoiceService.UpdateInvoice(InvoiceMapper.MapToDomainModel(invoice));
@@ -60,9 +75,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int invoiceId)
         {
+            if (invoiceId < 1) return BadRequest();
             try
             {
                 invoiceService.DeleteInvoice(invoiceId);

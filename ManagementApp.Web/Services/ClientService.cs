@@ -45,8 +45,10 @@ namespace ManagementApp.Web.Services
         public IEnumerable<Client> GetClients()
         {
             return context.Clients
-                .Include(client => client.Orders).ThenInclude(order => order)
-                .Include(client => client.Invoices).ThenInclude(invoice => invoice)
+                .Include(client => client.Orders)
+                //.ThenInclude(order => order)
+                .Include(client => client.Invoices)
+                //.ThenInclude(invoice => invoice)
                 .ToList();
         }
 

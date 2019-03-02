@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
 
@@ -23,9 +23,16 @@ namespace ManagementApp.Web.Mappers
             };
         }
 
-        internal static string MapManyToViewModel(object p)
+        internal static IEnumerable<InvoiceViewModel> MapManyToViewModel(IEnumerable<Invoice> invoices)
         {
-            throw new NotImplementedException();
+            var list = new List<InvoiceViewModel>();
+
+            foreach (var invoice in invoices)
+            {
+                list.Add(MapToViewModel(invoice));
+            }
+
+            return list;
         }
 
         public static Invoice MapToDomainModel(InvoiceViewModel viewModel)

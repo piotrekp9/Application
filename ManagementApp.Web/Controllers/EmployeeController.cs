@@ -36,7 +36,6 @@ namespace ManagementApp.Web.Controllers
             if (!ModelState.IsValid) return View(employee);
             try
             {
-
                 employeeService.AddEmployee(EmployeeMapper.MapToDomainModel(employee));
 
                 return RedirectToAction(nameof(Index));
@@ -64,6 +63,7 @@ namespace ManagementApp.Web.Controllers
         [HttpPost]
         public IActionResult Update(EmployeeViewModel employee)
         {
+            if (!ModelState.IsValid) return View(employee);
             try
             {
                 employeeService.UpdateEmployee(EmployeeMapper.MapToDomainModel(employee));
@@ -75,7 +75,7 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             try

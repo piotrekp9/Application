@@ -5,6 +5,7 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
@@ -15,11 +16,22 @@ namespace ManagementApp.Web.Controllers
         public ClientController(IClientService clientService) => this.clientService = clientService;
 
         [HttpGet]
-        public IActionResult Index() => View(ClientMapper.MapManyToViewModel(clientService.GetClients()));
+        public IActionResult Index(string filter)
+        {
+            var clients = ClientMapper.MapManyToViewModel(clientService.GetClients());
+            if (string.IsNullOrEmpty(filter)) return View(clients);
+
+            return View(clients.Where(client => client.Name.Contains(filter)).ToList());
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
+
 
         [HttpPost]
         public IActionResult Create(ClientViewModel client)
         {
+            if (!ModelState.IsValid) return View(client);
             try
             {
                 clientService.AddClient(ClientMapper.MapToDomainModel(client));
@@ -28,13 +40,14 @@ namespace ManagementApp.Web.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return Error();
             }
         }
 
         [HttpGet]
         public IActionResult Details(int clientId)
         {
+            if (clientId < 1) return BadRequest();
             try
             {
                 return View(ClientMapper.MapToViewModel(clientService.GetClientById(clientId)));
@@ -46,9 +59,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(ClientViewModel client)
         {
+            if (!ModelState.IsValid) return View(client);
             try
             {
                 clientService.UpdateClient(ClientMapper.MapToDomainModel(client));
@@ -60,9 +74,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int clientId)
         {
+            if (clientId < 1) return BadRequest();
             try
             {
                 clientService.DeleteClient(clientId);

@@ -13,12 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Views\Client\" />
-    <Folder Include="Views\Invoice\" />
-    <Folder Include="Views\Qualification\" />
-    <Folder Include="Views\Order\" />
-    <Folder Include="Views\Product\" />
-    <Folder Include="Views\Protocol\" />
   </ItemGroup>
 
 </Project>

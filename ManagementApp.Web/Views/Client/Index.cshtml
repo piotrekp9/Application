@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ManagementApp.Web.ViewModel.ClientViewModel>
+
+<h2>Lista Klientów</h2>
+
+<div class="form-group">
+    <form asp-action="Create" class="form-group" method="get">
+        <button type="submit">Dodaj nowego klienta</button>
+    </form>
+</div>
+
+<div class="form-group">
+    <form asp-controller="Client" asp-action="Index" method="get">
+        <input type="text" name="filter" placeholder="Szukana fraza..." />
+        <input type="submit" name="Search" />
+    </form>
+</div>
+<div class="form-group">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nazwa
+                </th>
+                <th>
+                    REGON
+                </th>
+                <th>
+                    NIP
+                </th>
+                <th>
+                    PESEL
+                </th>
+                <th>
+                    Nr. telefonu
+                </th>
+                <th>
+                    Ulica
+                </th>
+                <th>
+                    Miasto
+                </th>
+                <th>
+                    Kod pocztowy
+                </th>
+                <th>
+                    Edytuj
+                </th>
+                <th>
+                    Usuń
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.REGON)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.NIP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.PESEL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => c.PostalCode)
+                    </td>
+                    <td>
+                        <form asp-controller="Client" asp-action="Details" method="get">
+                            <button type="submit" name="id" value="@c.Id">Edytuj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Client" asp-action="Delete" method="post">
+                            <button type="submit" name="id" value="@c.Id" onclick="return confirm('Czy napewno chcesz usunąć klienta?')">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

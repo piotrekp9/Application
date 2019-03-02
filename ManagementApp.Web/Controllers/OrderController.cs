@@ -5,6 +5,7 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
@@ -15,13 +16,24 @@ namespace ManagementApp.Web.Controllers
         public OrderController(IOrderService orderService) => this.orderService = orderService;
 
         [HttpGet]
-        public IActionResult Index() => View(OrderMapper.MapManyToViewModel(orderService.GetOrders()));
+        public IActionResult Index(string filter)
+        {
+            var orders = OrderMapper.MapManyToViewModel(orderService.GetOrders());
+            if (string.IsNullOrEmpty(filter)) return View(orders);
+
+            return View(orders.Where(order =>
+            order.Title.Contains(filter)));
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(OrderViewModel order)
         {
             try
             {
+                if (!ModelState.IsValid) return BadRequest();
                 orderService.AddOrder(OrderMapper.MapToDomainModel(order));
 
                 return RedirectToAction(nameof(Index));
@@ -35,6 +47,7 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(int orderId)
         {
+            if (orderId < 1) return BadRequest();
             try
             {
                 return View(orderService.GetOrderById(orderId));
@@ -46,9 +59,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(OrderViewModel order)
         {
+            if (!ModelState.IsValid) return BadRequest();
             try
             {
                 orderService.UpdateOrder(OrderMapper.MapToDomainModel(order));
@@ -60,9 +74,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int orderId)
         {
+            if (orderId < 1) return BadRequest();
             try
             {
                 orderService.DeleteOrder(orderId);

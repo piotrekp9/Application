@@ -6,22 +6,19 @@ namespace ManagementApp.Web.Mappers
 {
     public class ClientMapper
     {
-        public static ClientViewModel MapToViewModel(Client client)
+        public static ClientViewModel MapToViewModel(Client client) => new ClientViewModel()
         {
-            return new ClientViewModel()
-            {
-                Id = client.Id,
-                City = client.City,
-                Email = client.Email,
-                Name = client.Name,
-                NIP = client.NIP,
-                PESEL = client.PESEL,
-                PhoneNumber = client.PhoneNumber,
-                PostalCode = client.PostalCode,
-                REGON = client.REGON,
-                Street = client.Street
-            };
-        }
+            Id = client.Id,
+            City = client.City,
+            Email = client.Email,
+            Name = client.Name,
+            NIP = client.NIP,
+            PESEL = client.PESEL,
+            PhoneNumber = client.PhoneNumber,
+            PostalCode = client.PostalCode,
+            REGON = client.REGON,
+            Street = client.Street
+        };
 
         public static IEnumerable<ClientViewModel> MapManyToViewModel(IEnumerable<Client> clients)
         {
@@ -35,20 +32,17 @@ namespace ManagementApp.Web.Mappers
             return list;
         }
 
-        public static Client MapToDomainModel(ClientViewModel viewModel)
+        public static Client MapToDomainModel(ClientViewModel viewModel) => new Client()
         {
-            return new Client()
-            {
-                Street = viewModel.Street,
-                REGON = viewModel.REGON,
-                PostalCode = viewModel.PostalCode,
-                City = viewModel.City,
-                Email = viewModel.Email,
-                Name = viewModel.Name,
-                NIP = viewModel.NIP,
-                PESEL = viewModel.PESEL,
-                PhoneNumber = viewModel.PhoneNumber
-            };
-        }
+            Street = viewModel.Street,
+            REGON = viewModel.REGON,
+            PostalCode = viewModel.PostalCode,
+            City = viewModel.City,
+            Email = viewModel.Email,
+            Name = viewModel.Name,
+            NIP = viewModel.NIP,
+            PESEL = viewModel.PESEL,
+            PhoneNumber = viewModel.PhoneNumber
+        };
     }
 }
