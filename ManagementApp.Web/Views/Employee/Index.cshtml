@@ -10,94 +10,92 @@
 
 <div class="form-group">
     <form asp-controller="Employee" asp-action="Index" method="get">
-        <input type="text" name="filter" placeholder="Szukana fraza..."/>
-        <input type="submit" name="Search"/>
+        <input type="text" name="filter" placeholder="Szukana fraza..." />
+        <input type="submit" name="Search" />
     </form>
 </div>
 <div class="form-group">
     <table class="table">
         <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Imie
-            </th>
-            <th>
-                Nazwisko
-            </th>
-            <th>
-                Zajęty
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Nr. telefonu
-            </th>
-            <th>
-                Ulica
-            </th>
-            <th>
-                Miasto
-            </th>
-            <th>
-                Kod pocztowy
-            </th>
-            <th>
-                Edytuj
-            </th>
-            <th>
-                Usuń
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Imie
+                </th>
+                <th>
+                    Nazwisko
+                </th>
+                <th>
+                    Zajęty
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Nr. telefonu
+                </th>
+                <th>
+                    Ulica
+                </th>
+                <th>
+                    Miasto
+                </th>
+                <th>
+                    Kod pocztowy
+                </th>
+                <th>
+                    Edytuj
+                </th>
+                <th>
+                    Usuń
+                </th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var employee in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.IsOccupied)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.Street)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => employee.PostalCode)
-                </td>
-                <td>
-                    <form asp-action="Details" method="get">
-                        <button type="submit" asp-action="Details" asp-route-id="@employee.Id" name="Id">
-                            Edytuj
-                        </button>
-                    </form>
-                </td>
-                <td>
-                    <button asp-action="Delete">
-                        @Html.ActionLink("Usuń", "Delete", "Employee", new {Id = employee.Id})
-                    </button>
-                </td>
-            </tr>
-        }
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.IsOccupied)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => employee.PostalCode)
+                    </td>
+                    <td>
+                        <form asp-controller="Employee" asp-action="Details" method="get">
+                            <button type="submit" name="id" value="@employee.Id">Edytuj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Employee" asp-action="Delete" method="post">
+                            <button type="submit" name="id" value="@employee.Id" onclick="return confirm('Czy napewno chcesz usunąć pracownika?')">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

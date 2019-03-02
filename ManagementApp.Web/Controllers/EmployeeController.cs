@@ -48,12 +48,12 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int employeeId)
+        public IActionResult Details(int id)
         {
-            if (employeeId < 1) return BadRequest(employeeId);
+            if (id < 1) return NotFound();
             try
             {
-                return View(EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(employeeId)));
+                return View(EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(id)));
             }
             catch (Exception ex)
             {
@@ -75,12 +75,12 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int employeeId)
+        [HttpPost]
+        public IActionResult Delete(int id)
         {
             try
             {
-                employeeService.DeleteEmployee(employeeId);
+                employeeService.DeleteEmployee(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
