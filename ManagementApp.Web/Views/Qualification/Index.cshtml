@@ -1,5 +1,66 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<ManagementApp.Web.ViewModel.QualificationViewModel>
+
+<h2>Lista Kwalifikacji</h2>
+
+<div class="form-group">
+    <form asp-action="Create" class="form-group" method="get">
+        <button type="submit">Dodaj kwalifikacje</button>
+    </form>
+</div>
+
+
+<div class="form-group">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nazwa
+                </th>
+                <th>
+                    Opis
+                </th>
+                <th>
+                    Typ
+                </th>
+                <th>
+                    Edytuj
+                </th>
+                <th>
+                    Usuń
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var q in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => q.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => q.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => q.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => q.QualificationType)
+                    </td>
+                    <td>
+                        <form asp-controller="Order" asp-action="Details" method="get">
+                            <button type="submit" name="id" value="@q.Id">Edytuj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Order" asp-action="Delete" method="post">
+                            <button type="submit" name="id" value="@q.Id" onclick="return confirm('Czy napewno chcesz usunąć kwalifikacje?')">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

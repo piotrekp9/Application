@@ -1,5 +1,95 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<ManagementApp.Web.ViewModel.ProtocolViewModel>
+
+<h2>Lista Protokolow</h2>
+
+<div class="form-group">
+    <form asp-action="Create" class="form-group" method="get">
+        <button type="submit">Dodaj nowy produkt</button>
+    </form>
+</div>
+
+<div class="form-group">
+    <form asp-controller="Order" asp-action="Index" method="get">
+        <input type="text" name="filter" placeholder="Szukana fraza..." />
+        <input type="submit" name="Search" />
+    </form>
+</div>
+<div class="form-group">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nazwa
+                </th>
+                <th>
+                    Opis
+                </th>
+                <th>
+                    Data wystawienia
+                </th>
+                <th>
+                    Czy pozytywny
+                </th>
+                <th>
+                    Proclamation
+                </th>
+                <th>
+                    Typ
+                </th>
+                <th>
+                    Pogoda
+                </th>
+                <th>
+                    Edytuj
+                </th>
+                <th>
+                    Usuń
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.DateOfIssue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.IsSuccessfull)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Proclamation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.ProtocolType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Weather)
+                </td>
+                <td>
+                    <form asp-controller="Order" asp-action="Details" method="get">
+                        <button type="submit" name="id" value="@p.Id">Edytuj</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Order" asp-action="Delete" method="post">
+                        <button type="submit" name="id" value="@p.Id" onclick="return confirm('Czy napewno chcesz usunąć protokół?')">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
