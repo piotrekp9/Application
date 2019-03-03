@@ -5,6 +5,7 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
@@ -15,11 +16,23 @@ namespace ManagementApp.Web.Controllers
         public QualificationController(IQualificationService qualificationService) => this.qualificationService = qualificationService;
 
         [HttpGet]
-        public IActionResult Index() => View(QualificationMapper.MapManyToViewModel(qualificationService.GetQualifications()));
+        public IActionResult Index(string filter)
+        {
+            var qualifications = QualificationMapper.MapManyToViewModel(qualificationService.GetQualifications());
+            if (string.IsNullOrEmpty(filter)) return View(qualifications);
+
+            return View(qualifications.Where(qualification => 
+                qualification.Name.Contains(filter)));
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(QualificationViewModel qualifictaion)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             try
             {
                 qualificationService.AddQualification(QualificationMapper.MapToDomainModel(qualifictaion));
@@ -35,6 +48,8 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(int qualificationId)
         {
+            if (qualificationId < 1) return BadRequest();
+
             try
             {
                 return View(qualificationService.GetQualificationById(qualificationId));
@@ -49,6 +64,8 @@ namespace ManagementApp.Web.Controllers
         [HttpPut]
         public IActionResult Update(QualificationViewModel qualification)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             try
             {
                 qualificationService.UpdateQualification(QualificationMapper.MapToDomainModel(qualification));
@@ -63,6 +80,8 @@ namespace ManagementApp.Web.Controllers
         [HttpDelete]
         public IActionResult Delete(int qualificationId)
         {
+            if (qualificationId < 1) return BadRequest();
+
             try
             {
                 qualificationService.DeleteQualification(qualificationId);

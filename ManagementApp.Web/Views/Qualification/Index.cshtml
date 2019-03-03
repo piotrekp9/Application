@@ -50,12 +50,12 @@
                         @Html.DisplayFor(modelItem => q.QualificationType)
                     </td>
                     <td>
-                        <form asp-controller="Order" asp-action="Details" method="get">
+                        <form asp-controller="Qualifictaion" asp-action="Details" method="get">
                             <button type="submit" name="id" value="@q.Id">Edytuj</button>
                         </form>
                     </td>
                     <td>
-                        <form asp-controller="Order" asp-action="Delete" method="post">
+                        <form asp-controller="Qualifictaion" asp-action="Delete" method="post">
                             <button type="submit" name="id" value="@q.Id" onclick="return confirm('Czy napewno chcesz usunąć kwalifikacje?')">Usuń</button>
                         </form>
                     </td>

@@ -5,6 +5,7 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
@@ -15,11 +16,23 @@ namespace ManagementApp.Web.Controllers
         public ProtocolController(IProtocolService protocolService) => this.protocolService = protocolService;
 
         [HttpGet]
-        public IActionResult Index() => View(ProtocolMapper.MapManyToViewModel(protocolService.GetProtocols()));
+        public IActionResult Index(string filter)
+        {
+            var protocols = ProtocolMapper.MapManyToViewModel(protocolService.GetProtocols());
+            if (string.IsNullOrEmpty(filter)) return View(protocols);
+
+            return View(protocols.Where(protocol =>
+                protocol.Name.Contains(filter)));
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(ProtocolViewModel protocol)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             try
             {
                 protocolService.AddProtocol(ProtocolMapper.MapToDomainModel(protocol));
@@ -35,6 +48,8 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(int protocolId)
         {
+            if (protocolId < 1) return BadRequest();
+
             try
             {
                 return View(protocolService.GetProtocolById(protocolId));
@@ -49,6 +64,8 @@ namespace ManagementApp.Web.Controllers
         [HttpPut]
         public IActionResult Update(ProtocolViewModel protocol)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             try
             {
                 protocolService.UpdateProtocol(ProtocolMapper.MapToDomainModel(protocol));
@@ -63,6 +80,8 @@ namespace ManagementApp.Web.Controllers
         [HttpDelete]
         public IActionResult Delete(int protocolId)
         {
+            if (protocolId < 1) return BadRequest();
+
             try
             {
                 protocolService.DeleteProtocol(protocolId);

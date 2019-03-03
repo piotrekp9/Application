@@ -5,6 +5,7 @@ using ManagementApp.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ManagementApp.Web.Controllers
 {
@@ -15,11 +16,22 @@ namespace ManagementApp.Web.Controllers
         public ProductController(IProductService productService) => this.productService = productService;
 
         [HttpGet]
-        public IActionResult Index() => View(ProductMapper.MapManyToViewModel(productService.GetProducts()));
+        public IActionResult Index(string filter)
+        {
+            var products = ProductMapper.MapManyToViewModel(productService.GetProducts());
+            if (string.IsNullOrEmpty(filter)) return View(products);
+
+            return View(products.Where(product => 
+            product.Name.Contains(filter)));
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(ProductViewModel product)
         {
+            if (!ModelState.IsValid) return BadRequest();
             try
             {
                 productService.AddProduct(ProductMapper.MapToDomainModel(product));
@@ -35,6 +47,7 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(int productId)
         {
+            if (productId < 1) return BadRequest();
             try
             {
                 return View(productService.GetProductById(productId));
@@ -49,6 +62,8 @@ namespace ManagementApp.Web.Controllers
         [HttpPut]
         public IActionResult Update(ProductViewModel product)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             try
             {
                 productService.UpdateProduct(ProductMapper.MapToDomainModel(product));
@@ -63,6 +78,8 @@ namespace ManagementApp.Web.Controllers
         [HttpDelete]
         public IActionResult Delete(int productId)
         {
+            if (productId < 1) return BadRequest();
+
             try
             {
                 productService.DeleteProduct(productId);
