@@ -2,8 +2,8 @@
 {
     public enum PaymentType
     {
-        Cash = 0,
-        Transfer,
-        CreditCard
+        Gotówka = 0,
+        Przelew,
+        KartaKredytowa
     }
 }

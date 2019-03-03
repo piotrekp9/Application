@@ -2,7 +2,7 @@
 {
     public enum ProtocolType
     {
-        PeriodicExamination = 0,
-        ReciptExamination
+        Cykliczny = 0,
+        Odbioru
     }
 }

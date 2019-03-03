@@ -25,7 +25,6 @@ namespace ManagementApp.Web.Services
             if (employeeToRemove == null) throw new ArgumentException($"There is no employee of that Id{employeeId}, to delete");
 
             context.Employees.Remove(employeeToRemove);
-
             context.SaveChanges();
         }
 

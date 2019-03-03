@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ManagementApp.Web.Data.Enums
 @{
+    ViewData["Title"] = "Dodaj nowe zamówienie";
 }
+
+<h2>Dodaj nowe zamówienie</h2>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <div class="form-group">
+                <form asp-action="Create" method="post">
+
+                    <div class="form-group">
+                        <label>Tytuł</label>
+                        <input class="form-control" name="Title" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Opis</label>
+                        <input class="form-control" name="Description" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <br />
+                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<OrderStatus>())
+                    </div>
+
+                    <div class="form-group">
+                        <label>Priorytet</label>
+                        <br />
+                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<OrderPriority>())
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data rozpoczęcia</label>
+                        <input class="form-control" name="StartDate" type="date" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Planowana data zakończenia</label>
+                        <input class="form-control" name="StartDate" type="date" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Faktyczna data zakończenia</label>
+                        <input class="form-control" name="StartDate" type="date" />
+                    </div>
+
+                    <button asp-action="Create" type="submit" class="form-group">Dodaj</button>
+                </form>
+                <form asp-action="Index" method="get" class="form-inline">
+                    <button asp-action="Index">Cofnij</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

@@ -2,9 +2,9 @@
 {
     public enum OrderStatus
     {
-        NotStarted = 0,
-        Started,
-        InCommission,
-        Finished
+        Zaplanowane = 0,
+        Zaczęte,
+        Protokołowane,
+        Zakończone
     }
 }

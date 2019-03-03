@@ -2,8 +2,8 @@
 {
     public enum QualificationType
     {
-        electric = 0,
-        instalation,
-        other
+        Elektryczne = 0,
+        Instalacyjne,
+        Inne
     }
 }

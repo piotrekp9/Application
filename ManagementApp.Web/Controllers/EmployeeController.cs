@@ -75,9 +75,10 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int id)
         {
+            if (id < 1) return BadRequest();
             try
             {
                 employeeService.DeleteEmployee(id);

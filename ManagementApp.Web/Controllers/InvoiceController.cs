@@ -27,7 +27,10 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Create(InvoiceViewModel client)

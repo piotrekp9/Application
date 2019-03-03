@@ -2,8 +2,8 @@
 {
     public enum OrderPriority
     {
-        Low = 0,
-        Medium,
-        High
+        Niski = 0,
+        Średni,
+        Wysoki
     }
 }
