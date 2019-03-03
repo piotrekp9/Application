@@ -4,14 +4,16 @@ using ManagementApp.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ManagementApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190303094222_migrationhigherlimit")]
+    partial class migrationhigherlimit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,14 +91,6 @@ namespace ManagementApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new { Id = 1, City = "Warszawa", Email = "adnrzej69@gmail.com", FirstName = "Andrzej", IsOccupied = true, LastName = "Duda", PhoneNumber = "0700123456", PostalCode = "00-001", Street = "Lecha Kaczyńskiego 1" },
-                        new { Id = 2, City = "Olsztyn", Email = "mmucha@wp.pl", FirstName = "Michał", IsOccupied = false, LastName = "Mucha", PhoneNumber = "500501502", PostalCode = "10-402", Street = "Żołnierska 5" },
-                        new { Id = 3, City = "Przasnysz", Email = "wostask@o2.pl", FirstName = "Wojtek", IsOccupied = false, LastName = "Konrad", PhoneNumber = "536457852", PostalCode = "06-300", Street = "Polna 10" },
-                        new { Id = 4, City = "Warszawa", Email = "bbaprodzki@wp.pl", FirstName = "Bartosz", IsOccupied = false, LastName = "Baprodzki", PhoneNumber = "604414524", PostalCode = "00-002", Street = "Długa 12" },
-                        new { Id = 5, City = "Olsztyn", Email = "mnowak@wp.pl", FirstName = "Mariusz", IsOccupied = false, LastName = "Nowak", PhoneNumber = "508258852", PostalCode = "10-402", Street = "Dworcowa 8" }
-                    );
                 });
 
             modelBuilder.Entity("ManagementApp.Web.Data.Models.EmployeesQualifications", b =>

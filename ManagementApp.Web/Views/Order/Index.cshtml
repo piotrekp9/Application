@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ManagementApp.Web.ViewModel.OrderViewModel>
 
-<h2>Lista Faktur</h2>
+<h2>Lista Zamówień</h2>
 
 <div class="form-group">
     <form asp-action="Create" class="form-group" method="get">
-        <button type="submit">Dodaj nową fakturę</button>
+        <button type="submit">Dodaj nowe zamówienie</button>
     </form>
 </div>
 
@@ -22,25 +22,25 @@
                     Id
                 </th>
                 <th>
-                    Tytuł
+                    Nazwa
                 </th>
                 <th>
                     Opis
                 </th>
                 <th>
-                    Status zamówienia
+                    Status
                 </th>
                 <th>
                     Priorytet
                 </th>
                 <th>
-                    Data rozpoczęcia
+                    Data rozp.
                 </th>
                 <th>
-                    Planowana data zakończenia
+                    Planowana data zak.
                 </th>
                 <th>
-                    Faktyczna data zakończenia
+                    Aktualna data zak.
                 </th>
                 <th>
                     Edytuj
@@ -78,6 +78,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => o.AcutalFinishDate)
                     </td>
+                    
                     <td>
                         <form asp-controller="Order" asp-action="Details" method="get">
                             <button type="submit" name="id" value="@o.Id">Edytuj</button>

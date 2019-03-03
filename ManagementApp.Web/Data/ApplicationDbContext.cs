@@ -39,25 +39,25 @@ namespace ManagementApp.Web.Data
 
             builder.Entity<Client>().HasMany(client => client.Invoices).WithOne(invoice => invoice.Client).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<Client>().HasMany(client => client.Orders).WithOne(order => order.Client).OnDelete(DeleteBehavior.SetNull);
-            builder.Entity<Client>().Property(client => client.City).HasMaxLength(30);
+            builder.Entity<Client>().Property(client => client.City).HasMaxLength(50);
             builder.Entity<Client>().Property(client => client.PostalCode).HasMaxLength(6);
             builder.Entity<Client>().Property(client => client.PESEL).HasMaxLength(11);
             builder.Entity<Client>().Property(client => client.REGON).HasMaxLength(14);
             builder.Entity<Client>().Property(client => client.NIP).HasMaxLength(10);
             builder.Entity<Client>().Property(client => client.Name).HasMaxLength(50);
-            builder.Entity<Client>().Property(client => client.PhoneNumber).HasMaxLength(11);
-            builder.Entity<Client>().Property(client => client.Street).HasMaxLength(30);
+            builder.Entity<Client>().Property(client => client.PhoneNumber).HasMaxLength(14);
+            builder.Entity<Client>().Property(client => client.Street).HasMaxLength(50);
             builder.Entity<Client>().Property(client => client.Email).HasMaxLength(254);
         
             builder.Entity<Employee>().HasMany(employee => employee.Orders).WithOne(order => order.Employee).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<Employee>().HasMany(employee => employee.Protocols).WithOne(protocol => protocol.Employee).OnDelete(DeleteBehavior.SetNull);
-            builder.Entity<Employee>().Property(employee => employee.City).HasMaxLength(30);
+            builder.Entity<Employee>().Property(employee => employee.City).HasMaxLength(50);
             builder.Entity<Employee>().Property(employee => employee.Email).HasMaxLength(254);
-            builder.Entity<Employee>().Property(employee => employee.FirstName).HasMaxLength(30);
-            builder.Entity<Employee>().Property(employee => employee.LastName).HasMaxLength(30);
-            builder.Entity<Employee>().Property(employee => employee.PhoneNumber).HasMaxLength(11);
-            builder.Entity<Employee>().Property(employee => employee.PostalCode).HasMaxLength(5);
-            builder.Entity<Employee>().Property(employee => employee.Street).HasMaxLength(30);
+            builder.Entity<Employee>().Property(employee => employee.FirstName).HasMaxLength(50);
+            builder.Entity<Employee>().Property(employee => employee.LastName).HasMaxLength(50);
+            builder.Entity<Employee>().Property(employee => employee.PhoneNumber).HasMaxLength(14);
+            builder.Entity<Employee>().Property(employee => employee.PostalCode).HasMaxLength(6);
+            builder.Entity<Employee>().Property(employee => employee.Street).HasMaxLength(50);
 
             builder.Entity<EmployeesQualifications>().HasKey(eq => new { eq.EmployeeId, eq.QualificationId });
             builder.Entity<EmployeesQualifications>().HasOne(eq => eq.Employee).WithMany(employee => employee.EmployeesQualifications).HasForeignKey(eo => eo.EmployeeId);
@@ -67,8 +67,8 @@ namespace ManagementApp.Web.Data
             builder.Entity<Product>().Property(product => product.Name).HasMaxLength(50);
             builder.Entity<Product>().Property(product => product.Price).HasColumnType("decimal(8,2)");
 
-            builder.Entity<Protocol>().Property(protocol => protocol.Name).HasMaxLength(30);
-            builder.Entity<Protocol>().Property(protocol => protocol.Weather).HasMaxLength(30);
+            builder.Entity<Protocol>().Property(protocol => protocol.Name).HasMaxLength(50);
+            builder.Entity<Protocol>().Property(protocol => protocol.Weather).HasMaxLength(50);
             builder.Entity<Protocol>().Property(protocol => protocol.Proclamation).HasMaxLength(500);
             builder.Entity<Protocol>().Property(protocol => protocol.Description).HasMaxLength(500);
 
@@ -87,12 +87,104 @@ namespace ManagementApp.Web.Data
                     Id = 1,
                     FirstName = "Andrzej",
                     LastName = "Duda",
-                    //Address = new Address(){City="Warszawa", PostalCode="00-000", Street="W dupie"},
-                    //ContactInfo = new ContactInfo(){Email ="adnrzej69@gmail.com", PhoneNumber="0700123456"},
+                    City="Warszawa",
+                    PostalCode ="00-001",
+                    Street ="Lecha Kaczyńskiego 1",
+                    Email ="adnrzej69@gmail.com",
+                    PhoneNumber ="0700123456",
+                    IsOccupied = true
+                },
+                new Employee()
+                {
+                    Id = 2,
+                    FirstName = "Michał",
+                    LastName = "Mucha",
+                    City="Olsztyn",
+                    PostalCode ="10-402",
+                    Street ="Żołnierska 5",
+                    Email ="mmucha@wp.pl",
+                    PhoneNumber ="500501502",
                     IsOccupied = false
+                },
+
+                new Employee()
+                {
+                    Id = 3,
+                    FirstName = "Wojtek",
+                    LastName = "Konrad",
+                    City="Przasnysz",
+                    PostalCode ="06-300",
+                    Street ="Polna 10",
+                    Email ="wostask@o2.pl",
+                    PhoneNumber ="536457852",
+                    IsOccupied = false
+                },
+
+                new Employee()
+                {
+                    Id = 4 ,
+                    FirstName = "Bartosz",
+                    LastName = "Baprodzki",
+                    City="Warszawa",
+                    PostalCode ="00-002",
+                    Street ="Długa 12",
+                    Email ="bbaprodzki@wp.pl",
+                    PhoneNumber ="604414524",
+                    IsOccupied = false
+                },
+                new Employee()
+                {
+                    Id = 5 ,
+                    FirstName = "Mariusz",
+                    LastName = "Nowak",
+                    City="Olsztyn",
+                    PostalCode ="10-402",
+                    Street ="Dworcowa 8",
+                    Email ="mnowak@wp.pl",
+                    PhoneNumber ="508258852",
+                    IsOccupied = false
+                }
+
+            };
+            var clientList = new Client[]
+            {
+                new Client()
+                {
+                    Id =1,
+                    Name = "Henryk Kania",
+                    REGON = "",
+                    NIP = "",
+                    PESEL = "62050604875",
+                    PhoneNumber = "500201212",
+                    Street = "Marcepanowa 54",
+                    City = "Przasnysz",
+                },
+                new Client()
+                {
+                    Id =2,
+                    Name = "Orlen",
+                    REGON = "12345678912345",
+                    NIP = "",
+                    PESEL = "",
+                    PhoneNumber = "500201212",
+                    Street = "Marcepanowa 54",
+                    City = "Przasnysz",
+                },
+                new Client()
+                {
+                    Id =3,
+                    Name = "Marek Kowalski",
+                    REGON = "",
+                    NIP = "6523214529",
+                    PESEL = "75030501963",
+                    PhoneNumber = "685245652",
+                    Street = "Leśna 4",
+                    City = "Przasnysz",
                 }
             };
 
+
+            builder.Entity<Client>().HasData(clientList);
             builder.Entity<Employee>().HasData(employeesList);
         }
     }
