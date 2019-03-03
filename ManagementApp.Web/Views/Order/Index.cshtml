@@ -1,5 +1,96 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<ManagementApp.Web.ViewModel.OrderViewModel>
+
+<h2>Lista Zamówień</h2>
+
+<div class="form-group">
+    <form asp-action="Create" class="form-group" method="get">
+        <button type="submit">Dodaj nowe zamówienie</button>
+    </form>
+</div>
+
+<div class="form-group">
+    <form asp-controller="Order" asp-action="Index" method="get">
+        <input type="text" name="filter" placeholder="Szukana fraza..." />
+        <input type="submit" name="Search" />
+    </form>
+</div>
+<div class="form-group">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nazwa
+                </th>
+                <th>
+                    Opis
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Priorytet
+                </th>
+                <th>
+                    Data rozp.
+                </th>
+                <th>
+                    Planowana data zak.
+                </th>
+                <th>
+                    Aktualna data zak.
+                </th>
+                <th>
+                    Edytuj
+                </th>
+                <th>
+                    Usuń
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.OrderStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.OrderPriority)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.PlannedFinishDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => o.AcutalFinishDate)
+                    </td>
+                    
+                    <td>
+                        <form asp-controller="Order" asp-action="Details" method="get">
+                            <button type="submit" name="id" value="@o.Id">Edytuj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Order" asp-action="Delete" method="post">
+                            <button type="submit" name="id" value="@o.Id" onclick="return confirm('Czy napewno chcesz usunąć zamówienie?')">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
