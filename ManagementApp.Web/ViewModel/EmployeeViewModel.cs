@@ -30,8 +30,8 @@ namespace ManagementApp.Web.ViewModel
         [StringLength(255)]
         public string Email { get; set; }
 
-        public IList<string> Qualifictaions { get; set; }
-        public IList<string> Orders { get; set; }
-        public IList<string> Protocols { get; set; }
+        public IList<QualificationViewModel> Qualifictaions { get; set; } = new List<QualificationViewModel>();
+        public IList<OrderViewModel> Orders { get; set; } = new List<OrderViewModel>();
+        public IList<ProtocolViewModel> Protocols { get; set; } = new List<ProtocolViewModel>();
     }
 }

@@ -52,7 +52,9 @@ namespace ManagementApp.Web.Controllers
             if (id < 1) return NotFound();
             try
             {
-                return View(EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(id)));
+                var employee = EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(id));
+
+                return View(employee);
             }
             catch (Exception ex)
             {
