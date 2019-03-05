@@ -1,7 +1,6 @@
 @model ManagementApp.Web.ViewModel.EmployeeViewModel
-
 @{
-    ViewData["Title"] = "Dodaj nowego pracownika";
+    ViewData["Title"] = "Edytuj dane pracownika";
 }
 
 <h2>Edytuj dane pracownika</h2>
@@ -13,42 +12,242 @@
 
                     <div class="form-group">
                         <label>Imię</label>
-                        <input asp-for="FirstName" class="form-control"/>
+                        <input asp-for="FirstName" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label>Nazwisko</label>
-                        <input class="form-control" />
+                        <input asp-for="LastName" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label>Nr. telefonu</label>
-                        <input class="form-control" />
+                        <input asp-for="PhoneNumber" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" />
+                        <input asp-for="Email" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label>Ulica</label>
-                        <input class="form-control" />
+                        <input asp-for="Street" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label>Miasto</label>
-                        <input class="form-control" />
+                        <input asp-for="City" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label>Kod pocztowy</label>
-                        <input class="form-control" />
+                        <input asp-for="PostalCode" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-control">
+                            <select></select>
+                            @*@Html.DropDownListFor()*@
+                        </div>
+                        <div class="form-control">
+                            <button asp-action="AddQualification">Dodaj kwalifikację</button>
+                        </div>
+
+
+                        <div class="form-group">
+                            <h3>Lista kwalifikacji</h3>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Id
+                                        </th>
+                                        <th>
+                                            Nazwa
+                                        </th>
+                                        <th>
+                                            Opis
+                                        </th>
+                                        <th>
+                                            Typ
+                                        </th>
+                                        <th>
+                                            Usuń
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var q in Model.Qualifictaions)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => q.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => q.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => q.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => q.QualificationType)
+                                            </td>
+                                            <td>
+                                                <form asp-controller="Qualifictaion" asp-action="Delete" method="post">
+                                                    <button type="submit" name="id" value="@q.Id" onclick="return confirm('Czy napewno chcesz usunąć kwalifikacje?')">Usuń</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Lista zamówień</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        Nazwa
+                                    </th>
+                                    <th>
+                                        Opis
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Priorytet
+                                    </th>
+                                    <th>
+                                        Data rozp.
+                                    </th>
+                                    <th>
+                                        Planowana data zak.
+                                    </th>
+                                    <th>
+                                        Aktualna data zak.
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var o in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.OrderStatus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.OrderPriority)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.PlannedFinishDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => o.AcutalFinishDate)
+                                        </td>
+                                        <td>
+                                            <form asp-controller="Order" asp-action="Delete" method="post">
+                                                <button type="submit" name="id" value="@o.Id" onclick="return confirm('Czy napewno chcesz usunąć zamówienie?')">Usuń</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        Nazwa
+                                    </th>
+                                    <th>
+                                        Opis
+                                    </th>
+                                    <th>
+                                        Data wystawienia
+                                    </th>
+                                    <th>
+                                        Czy pozytywny
+                                    </th>
+                                    <th>
+                                        Podsumowanie
+                                    </th>
+                                    <th>
+                                        Typ
+                                    </th>
+                                    <th>
+                                        Pogoda
+                                    </th>
+                                    <th>
+                                        Edytuj
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.Protocols)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.DateOfIssue)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.IsSuccessfull)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.Proclamation)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.ProtocolType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => p.Weather)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
 
                     <button type="submit">Dodaj</button>
                     <button asp-action="Index">Cofnij</button>
                 </form>
+
             </div>
         </section>
     </div>

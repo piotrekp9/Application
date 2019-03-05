@@ -12,11 +12,28 @@ namespace ManagementApp.Web.Services
     {
         readonly ApplicationDbContext context;
 
-        public EmployeeService(ApplicationDbContext context) => this.context = context;
+        public EmployeeService(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
 
-        public IEnumerable<Employee> GetEmployees() => context.Employees.Include(employee => employee.EmployeesQualifications).ToList();
+        public IEnumerable<Employee> GetEmployees()
+        {
+            return context.Employees
+                .Include(employee => employee.EmployeesQualifications)
+                    .ThenInclude(eq => eq.Qualification)
+                .Include(employee => employee.Orders)
+                .Include(employee => employee.Protocols)
+                .ToList();
+        }
 
-        public Employee GetEmployeeById(int employeeId) => context.Employees.Find(employeeId);
+        public Employee GetEmployeeById(int employeeId)
+        {
+            return context.Employees
+                .Include(emplo => emplo.EmployeesQualifications)
+                    .ThenInclude(eq => eq.Qualification)
+                .FirstOrDefault(employee => employee.Id == employeeId);
+        }
 
         public void DeleteEmployee(int employeeId)
         {
