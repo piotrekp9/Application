@@ -14,7 +14,7 @@ namespace ManagementApp.Web.Data.Models
         public DateTime PlannedFinishDate { get; set; }
         public DateTime AcutalFinishDate { get; set; }
 
-        public int InvoiceId { get; set; }
+        public int? InvoiceId { get; set; }
         public Invoice Invoice { get; set; }
 
         public int ClientId { get; set; }

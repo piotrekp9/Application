@@ -1,4 +1,5 @@
 ﻿using ManagementApp.Web.Data.Enums;
+using System.Collections.Generic;
 
 namespace ManagementApp.Web.Data.Models
 {
@@ -9,5 +10,6 @@ namespace ManagementApp.Web.Data.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
         public QualificationType QualificationType { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

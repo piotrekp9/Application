@@ -19,9 +19,12 @@ namespace ManagementApp.Web.ViewModel
         [Required]
         public OrderPriority OrderPriority { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime PlannedFinishDate { get; set; }
+        [DataType(DataType.Date)]
         public DateTime AcutalFinishDate { get; set; }
     }
 }

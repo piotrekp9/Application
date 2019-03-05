@@ -6,9 +6,9 @@ namespace ManagementApp.Web.Data.Models
     public class Invoice
     {
         public int Id { get; set; }
-        public int InvoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         public string Description { get; set; }
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
         public PaymentType PaymentType { get; set; }
         public DateTime DateOfIssue { get; set; } // data wystawienia faktury
         public int TaxRate { get; set; }

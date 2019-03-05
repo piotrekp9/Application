@@ -8,6 +8,14 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20190303093615_employeesdata.cs" />
     <Compile Remove="Data\Migrations\20190303093615_employeesdata.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190305174604_seeddata.cs" />
+    <Compile Remove="Data\Migrations\20190305174604_seeddata.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190305181143_seeddata.cs" />
+    <Compile Remove="Data\Migrations\20190305181143_seeddata.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190305181544_seeddata.cs" />
+    <Compile Remove="Data\Migrations\20190305181544_seeddata.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190305183842_seeddata.cs" />
+    <Compile Remove="Data\Migrations\20190305183842_seeddata.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

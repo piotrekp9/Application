@@ -4,7 +4,6 @@
     {
         Zaplanowane = 0,
         Zaczęte,
-        Protokołowane,
         Zakończone
     }
 }
