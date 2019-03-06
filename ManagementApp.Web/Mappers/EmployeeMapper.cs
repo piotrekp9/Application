@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Employee;
 
 namespace ManagementApp.Web.Mappers
 {
@@ -46,6 +48,36 @@ namespace ManagementApp.Web.Mappers
                 PhoneNumber = employeeViewModel.PhoneNumber,
                 PostalCode = employeeViewModel.PostalCode,
                 Street = employeeViewModel.Street,
+            };
+        }
+
+        public static EmployeeViewModel MapToViewModel(Employee employee, IEnumerable<EmployeesQualifications> employeesQualifications, IEnumerable<ProtocolViewModel> protocols, IEnumerable<OrderViewModel> orders)
+        {
+            var employeeQualifications = new List<QualificationViewModel>();
+
+            if (employeesQualifications != null && employeesQualifications.Any())
+            {
+
+                foreach (var item in employeesQualifications)
+                {
+                    employeeQualifications.Add(QualificationMapper.MapToViewModel(item.Qualification));
+                }
+            }
+
+            return new EmployeeViewModel()
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                City = employee.City,
+                Email = employee.Email,
+                IsOccupied = employee.IsOccupied,
+                PhoneNumber = employee.PhoneNumber,
+                PostalCode = employee.PostalCode,
+                Street = employee.Street,
+                Orders = orders,
+                Protocols = protocols,
+                Qualifictaions= employeeQualifications
             };
         }
     }

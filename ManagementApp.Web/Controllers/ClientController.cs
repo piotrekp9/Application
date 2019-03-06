@@ -45,12 +45,12 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int clientId)
+        public IActionResult Details(int id)
         {
-            if (clientId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
             try
             {
-                return View(ClientMapper.MapToViewModel(clientService.GetClientById(clientId)));
+                return View(ClientMapper.MapToViewModel(clientService.GetClientById(id)));
 
             }
             catch (Exception ex)
