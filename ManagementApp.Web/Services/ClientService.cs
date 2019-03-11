@@ -37,8 +37,8 @@ namespace ManagementApp.Web.Services
         public Client GetClientById(int clientId)
         {
             return context.Clients
-                .Include(client => client.Orders).ThenInclude(order => order)
-                .Include(client => client.Invoices).ThenInclude(invoice => invoice)
+                .Include(client => client.Orders)
+                .Include(client => client.Invoices)
                 .FirstOrDefault(client => client.Id == clientId);
         }
 
@@ -46,9 +46,7 @@ namespace ManagementApp.Web.Services
         {
             return context.Clients
                 .Include(client => client.Orders)
-                //.ThenInclude(order => order)
                 .Include(client => client.Invoices)
-                //.ThenInclude(invoice => invoice)
                 .ToList();
         }
 

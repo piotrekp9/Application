@@ -50,8 +50,9 @@ namespace ManagementApp.Web.Controllers
             if (id < 1) return BadRequest();
             try
             {
-                return View(ClientMapper.MapToViewModel(clientService.GetClientById(id)));
-
+                var client = clientService.GetClientById(id);
+                var mappedClient = ClientMapper.MapToViewModel(client, client.Orders, client.Invoices);
+                return View(mappedClient);
             }
             catch (Exception ex)
             {
