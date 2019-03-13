@@ -11,7 +11,7 @@ namespace ManagementApp.Web.Controllers
 {
     public class QualificationController : Controller
     {
-        private IQualificationService qualificationService;
+        private readonly IQualificationService qualificationService;
 
         public QualificationController(IQualificationService qualificationService) => this.qualificationService = qualificationService;
 
@@ -46,13 +46,15 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int qualificationId)
+        public IActionResult Details(int id)
         {
-            if (qualificationId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
 
             try
             {
-                return View(qualificationService.GetQualificationById(qualificationId));
+                var qualification = qualificationService.GetQualificationById(id);
+                var mappedQualification = QualificationMapper.MapToViewModel(qualification, qualification.EmployeesQualifications);
+                return View(mappedQualification);
 
             }
             catch (Exception ex)
@@ -61,7 +63,7 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(QualificationViewModel qualification)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -77,14 +79,14 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int qualificationId)
+        [HttpPost]
+        public IActionResult Delete(int id)
         {
-            if (qualificationId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
 
             try
             {
-                qualificationService.DeleteQualification(qualificationId);
+                qualificationService.DeleteQualification(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

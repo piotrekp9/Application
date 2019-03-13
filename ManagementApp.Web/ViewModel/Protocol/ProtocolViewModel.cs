@@ -1,8 +1,9 @@
 ﻿using ManagementApp.Web.Data.Enums;
+using ManagementApp.Web.ViewModel.Employee;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementApp.Web.ViewModel
+namespace ManagementApp.Web.ViewModel.Protocol
 {
     public class ProtocolViewModel
     {
@@ -32,5 +33,8 @@ namespace ManagementApp.Web.ViewModel
 
         [Required]
         public ProtocolType ProtocolType { get; set; }
+
+        public EmployeeViewModel Employee { get; set; }
+        public OrderViewModel Order { get; set; }
     }
 }

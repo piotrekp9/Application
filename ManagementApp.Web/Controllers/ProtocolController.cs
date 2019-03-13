@@ -2,6 +2,7 @@
 using ManagementApp.Web.Models;
 using ManagementApp.Web.Services.Interfaces;
 using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Protocol;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
@@ -11,9 +12,16 @@ namespace ManagementApp.Web.Controllers
 {
     public class ProtocolController : Controller
     {
-        private IProtocolService protocolService;
+        private readonly IProtocolService protocolService;
+        private readonly IEmployeeService employeeService;
+        private readonly IOrderService orderService;
 
-        public ProtocolController(IProtocolService protocolService) => this.protocolService = protocolService;
+        public ProtocolController(IProtocolService protocolService, IEmployeeService employeeService, IOrderService orderService)
+        {
+            this.protocolService = protocolService;
+            this.employeeService = employeeService;
+            this.orderService = orderService;
+        }
 
         [HttpGet]
         public IActionResult Index(string filter)
@@ -46,14 +54,17 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int protocolId)
+        public IActionResult Details(int id)
         {
-            if (protocolId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
 
             try
             {
-                return View(protocolService.GetProtocolById(protocolId));
+                var protocol = protocolService.GetProtocolById(id);
+                var mappedProtocol = ProtocolMapper.MapToViewModel(protocol, EmployeeMapper.MapToViewModel(protocol.Employee), OrderMapper.MapToViewModel(protocol.Order));
+                var details = new ProtocolDetailsViewModel(EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees()), OrderMapper.MapManyToViewModel(orderService.GetOrders()), mappedProtocol);
 
+                return View(details);
             }
             catch (Exception ex)
             {
@@ -61,7 +72,7 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(ProtocolViewModel protocol)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -77,14 +88,14 @@ namespace ManagementApp.Web.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int protocolId)
+        [HttpPost]
+        public IActionResult Delete(int id)
         {
-            if (protocolId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
 
             try
             {
-                protocolService.DeleteProtocol(protocolId);
+                protocolService.DeleteProtocol(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
