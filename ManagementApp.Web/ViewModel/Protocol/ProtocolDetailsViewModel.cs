@@ -10,7 +10,7 @@ namespace ManagementApp.Web.ViewModel.Protocol
         {
             Protocol = protocol;
             Employees = new SelectList(employees, "Id", "LastName");
-            Orders = new SelectList(orders, "Id", "Name");
+            Orders = new SelectList(orders, "Id", "Title");
         }
 
         public ProtocolViewModel Protocol { get; set; }

@@ -3,6 +3,7 @@ using ManagementApp.Web.Models;
 using ManagementApp.Web.Services.Interfaces;
 using ManagementApp.Web.ViewModel;
 using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Protocol;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
