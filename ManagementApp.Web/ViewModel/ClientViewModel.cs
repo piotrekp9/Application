@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ManagementApp.Web.ViewModel.Invoice;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ManagementApp.Web.ViewModel
