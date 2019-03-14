@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ManagementApp.Web.ViewModel.Invoice;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ManagementApp.Web.ViewModel
@@ -41,7 +42,7 @@ namespace ManagementApp.Web.ViewModel
         [StringLength(11)]
         public string PESEL { get; set; }
 
-        public ICollection<OrderViewModel> Orders = new List<OrderViewModel>();
-        public ICollection<InvoiceViewModel> Invoices = new List<InvoiceViewModel>();
+        public IEnumerable<OrderViewModel> Orders = new List<OrderViewModel>();
+        public IEnumerable<InvoiceViewModel> Invoices = new List<InvoiceViewModel>();
     }
 }

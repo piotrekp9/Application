@@ -2,8 +2,11 @@
 using ManagementApp.Web.Models;
 using ManagementApp.Web.Services.Interfaces;
 using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Protocol;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -12,8 +15,13 @@ namespace ManagementApp.Web.Controllers
     public class EmployeeController : Controller
     {
         private IEmployeeService employeeService;
+        private readonly IQualificationService qualificationService;
 
-        public EmployeeController(IEmployeeService employeeService) => this.employeeService = employeeService;
+        public EmployeeController(IEmployeeService employeeService, IQualificationService qualificationService)
+        {
+            this.employeeService = employeeService;
+            this.qualificationService = qualificationService;
+        }
 
         [HttpGet]
         public IActionResult Index(string filter)
@@ -52,9 +60,24 @@ namespace ManagementApp.Web.Controllers
             if (id < 1) return NotFound();
             try
             {
-                var employee = EmployeeMapper.MapToViewModel(employeeService.GetEmployeeById(id));
+                var employee = (employeeService.GetEmployeeById(id));
 
-                return View(employee);
+                var protocols = new List<ProtocolViewModel>();
+                if (employee.Protocols != null && employee.Protocols.Any())
+                    protocols = ProtocolMapper.MapManyToViewModel(employee.Protocols).ToList();
+
+                var orders = new List<OrderViewModel>();
+                if(employee.Orders != null && employee.Orders.Any())
+                    orders = OrderMapper.MapManyToViewModel(employee.Orders).ToList();
+                
+                var mappedEmployee = EmployeeMapper.MapToViewModel(employee, employee.EmployeesQualifications, protocols, orders);
+
+                var result = new EmployeeDetailsViewModel(QualificationMapper.MapManyToViewModel(qualificationService.GetQualifications()).ToList())
+                {
+                    Employee = mappedEmployee,
+                };
+
+                return View(result);
             }
             catch (Exception ex)
             {

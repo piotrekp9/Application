@@ -4,11 +4,13 @@
 }
 
 <h2>Edytuj dane klienta</h2>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <div class="form-group">
-                <form asp-action="Update" method="post">
+
+<form asp-action="Update" method="post">
+
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                <div class="form-group">
 
                     <div class="form-group">
                         <label>Nazwa</label>
@@ -54,192 +56,173 @@
                         <label>Kod pocztowy</label>
                         <input asp-for="PostalCode" class="form-control" />
                     </div>
-
-                    <div class="form-group">
-                        <div class="form-control">
-                            <select></select>
-                            <select>Wybierz</select>
-                        </div>
-                        <div class="form-control">
-                            <button asp-action="AddInvoice">Dodaj kwalifikację</button>
-                        </div>
-
-                        <div class="form-group">
-                            <h3>Lista faktur</h3>
-
-                            <div class="form-group">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Id
-                                            </th>
-                                            <th>
-                                                Nr. faktury
-                                            </th>
-                                            <th>
-                                                Sposób płatności
-                                            </th>
-                                            <th>
-                                                Data wystawienia
-                                            </th>
-                                            <th>
-                                                Opis
-                                            </th>
-                                            <th>
-                                                Nr. kontra
-                                            </th>
-                                            <th>
-                                                Kwota brutto
-                                            </th>
-                                            <th>
-                                                Kwota netto
-                                            </th>
-                                            <th>
-                                                Podatek
-                                            </th>
-                                            <th>
-                                                Stawka
-                                            </th>
-                                            <th>
-                                                Edytuj
-                                            </th>
-                                            <th>
-                                                Usuń
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var i in Model.Invoices)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.Id)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.InvoiceNumber)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.PaymentType)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.DateOfIssue)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.Description)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.AccountNumber)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.PaymentWithoutTax)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.PaymentWithTax)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.TaxPayment)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => i.TaxRate)
-                                                </td>
-                                                <td>
-                                                    <form asp-controller="Employee" asp-action="DeleteInvoice" method="post">
-                                                        <button type="submit" name="id" value="@i.Id" onclick="return confirm('Czy napewno chcesz usunąć fakturę z tego klienta?')">Usuń</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <h3>Lista zamówień</h3>
-
-                        <div class="form-control">
-                            <select></select>
-                            <select>Wybierz</select>
-                        </div>
-                        <div class="form-control">
-                            <button asp-action="AddOrder">Dodaj zamówienie</button>
-                        </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Id
-                                    </th>
-                                    <th>
-                                        Nazwa
-                                    </th>
-                                    <th>
-                                        Opis
-                                    </th>
-                                    <th>
-                                        Status
-                                    </th>
-                                    <th>
-                                        Priorytet
-                                    </th>
-                                    <th>
-                                        Data rozp.
-                                    </th>
-                                    <th>
-                                        Planowana data zak.
-                                    </th>
-                                    <th>
-                                        Aktualna data zak.
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var o in Model.Orders)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.Id)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.Title)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.Description)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.OrderStatus)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.OrderPriority)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.StartDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.PlannedFinishDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => o.AcutalFinishDate)
-                                        </td>
-                                        <td>
-                                            <form asp-controller="Employee" asp-action="DeleteOrder" method="post">
-                                                <button type="submit" name="id" value="@o.Id" onclick="return confirm('Czy napewno chcesz usunąć zamówienie z tego klienta?')">Usuń</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <button type="submit">Dodaj</button>
-                    <button asp-action="Index">Cofnij</button>
-                </form>
-
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <h3>Lista faktur</h3>
+
+        <div class="form-group">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Nr. faktury
+                        </th>
+                        <th>
+                            Sposób płatności
+                        </th>
+                        <th>
+                            Data wystawienia
+                        </th>
+                        <th>
+                            Opis
+                        </th>
+                        <th>
+                            Nr. kontra
+                        </th>
+                        <th>
+                            Kwota brutto
+                        </th>
+                        <th>
+                            Kwota netto
+                        </th>
+                        <th>
+                            Podatek
+                        </th>
+                        <th>
+                            Stawka
+                        </th>
+                        <th>
+                            Usuń
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in Model.Invoices)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.InvoiceNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.PaymentType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.DateOfIssue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.AccountNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.PaymentWithoutTax)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.PaymentWithTax)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.TaxPayment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => i.TaxRate)
+                            </td>
+                            <td>
+                                <form asp-controller="Employee" asp-action="DeleteInvoice" method="post">
+                                    <button type="submit" name="id" value="@i.Id" onclick="return confirm('Czy napewno chcesz usunąć fakturę z tego klienta?')">Usuń</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3>Lista zamówień</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Nazwa
+                    </th>
+                    <th>
+                        Opis
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Priorytet
+                    </th>
+                    <th>
+                        Data rozp.
+                    </th>
+                    <th>
+                        Planowana data zak.
+                    </th>
+                    <th>
+                        Aktualna data zak.
+                    </th>
+                    <th>
+                        Usuń
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var o in Model.Orders)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.OrderStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.OrderPriority)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.PlannedFinishDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => o.AcutalFinishDate)
+                        </td>
+                        <td>
+                            <form asp-controller="Employee" asp-action="DeleteOrder" method="post">
+                                <button type="submit" name="id" value="@o.Id" onclick="return confirm('Czy napewno chcesz usunąć zamówienie z tego klienta?')">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit">Zapisz</button>
+    <button asp-action="Index">Cofnij</button>
+
+</form>

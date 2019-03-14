@@ -2,6 +2,7 @@
 using ManagementApp.Web.Models;
 using ManagementApp.Web.Services.Interfaces;
 using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Invoice;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
@@ -12,8 +13,12 @@ namespace ManagementApp.Web.Controllers
     public class InvoiceController : Controller
     {
         private IInvoiceService invoiceService;
-
-        public InvoiceController(IInvoiceService invoiceService) => this.invoiceService = invoiceService;
+        private IClientService clientService;
+        public InvoiceController(IInvoiceService invoiceService, IClientService clientService)
+        {
+            this.clientService = clientService;
+            this.invoiceService = invoiceService;
+        }
 
         [HttpGet]
         public IActionResult Index(string filter)
@@ -49,13 +54,19 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int invoiceId)
+        public IActionResult Details(int id)
         {
-            if (invoiceId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
             try
             {
-                return View(invoiceService.GetInvoiceById(invoiceId));
+                var mappedClients = clientService.GetClients();
+                var invoice = invoiceService.GetInvoiceById(id);
+                var mappedInvoice = InvoiceMapper.MapToViewModel(invoice, invoice.Order);
 
+                var details = new InvoiceDetailsViewModel(ClientMapper.MapManyToViewModel(mappedClients));
+                details.Invoice = mappedInvoice;
+
+                return View(details);
             }
             catch (Exception ex)
             {
@@ -79,12 +90,12 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int invoiceId)
+        public IActionResult Delete(int id)
         {
-            if (invoiceId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
             try
             {
-                invoiceService.DeleteInvoice(invoiceId);
+                invoiceService.DeleteInvoice(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

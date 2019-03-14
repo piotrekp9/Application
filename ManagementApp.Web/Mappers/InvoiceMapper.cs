@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
-using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Invoice;
 
 namespace ManagementApp.Web.Mappers
 {
@@ -20,6 +21,26 @@ namespace ManagementApp.Web.Mappers
                 PaymentWithTax = invoice.PaymentWithTax,
                 TaxPayment = invoice.TaxPayment,
                 TaxRate = invoice.TaxRate
+            };
+        }
+
+        public static InvoiceViewModel MapToViewModel(Invoice invoice, Order order)
+        {
+            var mappedOrder = OrderMapper.MapToViewModel(order);
+
+            return new InvoiceViewModel()
+            {
+                Id = invoice.Id,
+                AccountNumber = invoice.AccountNumber,
+                DateOfIssue = invoice.DateOfIssue,
+                Description = invoice.Description,
+                InvoiceNumber = invoice.InvoiceNumber,
+                PaymentType = invoice.PaymentType,
+                PaymentWithoutTax = invoice.PaymentWithoutTax,
+                PaymentWithTax = invoice.PaymentWithTax,
+                TaxPayment = invoice.TaxPayment,
+                TaxRate = invoice.TaxRate,
+                Order = mappedOrder
             };
         }
 

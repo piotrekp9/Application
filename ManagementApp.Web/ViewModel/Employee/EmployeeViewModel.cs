@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ManagementApp.Web.ViewModel.Protocol;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementApp.Web.ViewModel
+namespace ManagementApp.Web.ViewModel.Employee
 {
     public class EmployeeViewModel
     {
@@ -38,8 +39,8 @@ namespace ManagementApp.Web.ViewModel
         [StringLength(255)]
         public string Email { get; set; }
 
-        public IList<QualificationViewModel> Qualifictaions { get; set; } = new List<QualificationViewModel>();
-        public IList<OrderViewModel> Orders { get; set; } = new List<OrderViewModel>();
-        public IList<ProtocolViewModel> Protocols { get; set; } = new List<ProtocolViewModel>();
+        public IEnumerable<QualificationViewModel> Qualifictaions { get; set; } = new List<QualificationViewModel>();
+        public IEnumerable<OrderViewModel> Orders { get; set; } = new List<OrderViewModel>();
+        public IEnumerable<ProtocolViewModel> Protocols { get; set; } = new List<ProtocolViewModel>();
     }
 }

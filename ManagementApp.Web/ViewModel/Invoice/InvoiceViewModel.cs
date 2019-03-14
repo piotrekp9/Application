@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementApp.Web.ViewModel
+namespace ManagementApp.Web.ViewModel.Invoice
 {
     public class InvoiceViewModel
     {
@@ -40,5 +40,7 @@ namespace ManagementApp.Web.ViewModel
 
         [Required]
         public decimal TaxPayment { get; set; }
+
+        public OrderViewModel Order { get; set; }
     }
 }

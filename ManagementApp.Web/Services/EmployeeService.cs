@@ -20,10 +20,10 @@ namespace ManagementApp.Web.Services
         public IEnumerable<Employee> GetEmployees()
         {
             return context.Employees
-                .Include(employee => employee.EmployeesQualifications)
-                    .ThenInclude(eq => eq.Qualification)
-                .Include(employee => employee.Orders)
-                .Include(employee => employee.Protocols)
+                //.Include(employee => employee.EmployeesQualifications)
+                //    .ThenInclude(eq => eq.Qualification)
+                //.Include(employee => employee.Orders)
+                //.Include(employee => employee.Protocols)
                 .ToList();
         }
 
@@ -32,6 +32,7 @@ namespace ManagementApp.Web.Services
             return context.Employees
                 .Include(emplo => emplo.EmployeesQualifications)
                     .ThenInclude(eq => eq.Qualification)
+                .Include(em => em.Orders)
                 .FirstOrDefault(employee => employee.Id == employeeId);
         }
 

@@ -45,13 +45,14 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int clientId)
+        public IActionResult Details(int id)
         {
-            if (clientId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
             try
             {
-                return View(ClientMapper.MapToViewModel(clientService.GetClientById(clientId)));
-
+                var client = clientService.GetClientById(id);
+                var mappedClient = ClientMapper.MapToViewModel(client, client.Orders, client.Invoices);
+                return View(mappedClient);
             }
             catch (Exception ex)
             {

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Protocol;
 
 namespace ManagementApp.Web.Mappers
 {
@@ -18,7 +19,24 @@ namespace ManagementApp.Web.Mappers
                 IsSuccessfull = protocol.IsSuccessfull,
                 Proclamation = protocol.Proclamation,
                 ProtocolType = protocol.ProtocolType,
-                Weather = protocol.Weather
+                Weather = protocol.Weather,
+            };
+        }
+
+        public static ProtocolViewModel MapToViewModel(Protocol protocol, EmployeeViewModel employee, OrderViewModel order)
+        {
+            return new ProtocolViewModel()
+            {
+                Id = protocol.Id,
+                Description = protocol.Description,
+                Name = protocol.Name,
+                DateOfIssue = protocol.DateOfIssue,
+                IsSuccessfull = protocol.IsSuccessfull,
+                Proclamation = protocol.Proclamation,
+                ProtocolType = protocol.ProtocolType,
+                Weather = protocol.Weather,
+                Employee = employee,
+                Order = order
             };
         }
 

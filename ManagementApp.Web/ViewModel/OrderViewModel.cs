@@ -12,7 +12,7 @@ namespace ManagementApp.Web.ViewModel
         [StringLength(50)]
         public string Title { get; set; }
         [Required]
-        [StringLength(50)]
+        [StringLength(500)]
         public string Description { get; set; }
         [Required]
         public OrderStatus OrderStatus { get; set; }

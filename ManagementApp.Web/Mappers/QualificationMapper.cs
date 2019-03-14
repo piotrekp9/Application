@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
+using ManagementApp.Web.ViewModel.Employee;
 
 namespace ManagementApp.Web.Mappers
 {
@@ -36,6 +37,25 @@ namespace ManagementApp.Web.Mappers
                 Description = viewModel.Description,
                 QualificationType = viewModel.QualificationType,
                 Name = viewModel.Name,
+            };
+        }
+
+        public static QualificationViewModel MapToViewModel(Qualification qualification, ICollection<EmployeesQualifications> employeesQualifications)
+        {
+            var mappedEmployees = new List<EmployeeViewModel>();
+
+            foreach (var employeeQualification in employeesQualifications)
+            {
+                mappedEmployees.Add(EmployeeMapper.MapToViewModel(employeeQualification.Employee));
+            }
+
+            return new QualificationViewModel()
+            {
+                Id = qualification.Id,
+                Description = qualification.Description,
+                Name = qualification.Name,
+                QualificationType = qualification.QualificationType,
+                Employees = mappedEmployees
             };
         }
     }

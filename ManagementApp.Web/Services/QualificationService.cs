@@ -37,6 +37,7 @@ namespace ManagementApp.Web.Services
         {
             return context.Qualifications
                 .Include(qualification => qualification.EmployeesQualifications)
+                    .ThenInclude(eq => eq.Employee)
                 .FirstOrDefault(qualification => qualification.Id == qualificationId);
         }
 
