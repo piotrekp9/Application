@@ -1,5 +1,118 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ManagementApp.Web.ViewModel.QualificationViewModel
+@using ManagementApp.Web.Data.Enums
 @{
+    ViewData["Title"] = "Edytuj kwalifikację";
+}
+
+<h2>Edytuj kwalifikację</h2>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <div class="form-group">
+                <form asp-action="Update" method="post">
+
+                    <div class="form-group">
+                        <label>Nazwa</label>
+                        <input asp-for="@Model.Name" class="form-control" name="Name" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Opis</label>
+                        <input asp-for="@Model.Description" class="form-control" name="Description" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Typ kwalifikacji</label>
+                        <br />
+                        @Html.DropDownList("QualificationType", Html.GetEnumSelectList<QualificationType>(), Model.QualificationType)
+                    </div>
+
+                    <button asp-action="Update" type="submit" class="form-group">Zapisz zmiany</button>
+                </form>
+                <form asp-action="Index" method="get" class="form-inline">
+                    <button asp-action="Index">Cofnij</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+
+@if (Model.Employees.Any())
+{
+    <h3>Lista pracowników z tą kwalifikacją</h3>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Imie
+                    </th>
+                    <th>
+                        Nazwisko
+                    </th>
+                    <th>
+                        Zajęty
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Nr. telefonu
+                    </th>
+                    <th>
+                        Ulica
+                    </th>
+                    <th>
+                        Miasto
+                    </th>
+                    <th>
+                        Kod pocztowy
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var employee in Model.Employees)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.IsOccupied)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.Street)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => employee.PostalCode)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+else
+{
+    <p>Żaden pracownik nie posiada takiej kwalifikacji</p>
 }

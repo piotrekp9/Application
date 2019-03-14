@@ -3,6 +3,7 @@ using System.Linq;
 using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel;
 using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Protocol;
 
 namespace ManagementApp.Web.Mappers
 {
