@@ -50,8 +50,8 @@ namespace ManagementApp.Web.Controllers
             if (orderId < 1) return BadRequest();
             try
             {
-                return View(orderService.GetOrderById(orderId));
 
+                return View(orderService.GetOrderById(orderId));
             }
             catch (Exception ex)
             {

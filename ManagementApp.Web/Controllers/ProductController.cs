@@ -11,7 +11,7 @@ namespace ManagementApp.Web.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductService productService;
+        private readonly IProductService productService;
 
         public ProductController(IProductService productService) => this.productService = productService;
 
@@ -45,13 +45,12 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int productId)
+        public IActionResult Details(int id)
         {
-            if (productId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
             try
             {
-                return View(productService.GetProductById(productId));
-
+                return View(ProductMapper.MapToViewModel(productService.GetProductById(id)));
             }
             catch (Exception ex)
             {
@@ -76,13 +75,13 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(int productId)
+        public IActionResult Delete(int id)
         {
-            if (productId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
 
             try
             {
-                productService.DeleteProduct(productId);
+                productService.DeleteProduct(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
