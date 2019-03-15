@@ -76,12 +76,12 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int clientId)
+        public IActionResult Delete(int id)
         {
-            if (clientId < 1) return BadRequest();
+            if (id < 1) return BadRequest();
             try
             {
-                clientService.DeleteClient(clientId);
+                clientService.DeleteClient(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
