@@ -1,4 +1,5 @@
 ﻿@model ManagementApp.Web.ViewModel.Invoice.InvoiceDetailsViewModel
+@using ManagementApp.Web.Data.Enums
 @{
     ViewData["Title"] = "Edytuj dane faktury";
 }
@@ -13,53 +14,63 @@
                 <div class="form-group">
 
                     <div class="form-group">
-                        <label>Imię</label>
-                        <input asp-for="@Model.Invoice.Id" class="form-control" />
+                        <label>Nr. faktury</label>
+                        <input asp-for="@Model.Invoice.InvoiceNumber" type="text" class="form-control" />
                     </div>
 
                     <div class="form-group">
-                        <label>Nazwisko</label>
-                        <input asp-for="@Model.Invoice.InvoiceNumber" class="form-control" />
+                        <label>Opis</label>
+                        <input asp-for="@Model.Invoice.Description" type="text" class="form-control" />
                     </div>
 
                     <div class="form-group">
-                        <label>Nr. telefonu</label>
-                        <input asp-for="@Model.Invoice." class="form-control" />
+                        <label>Nr. konta</label>
+                        <input asp-for="@Model.Invoice.AccountNumber" type="text" class="form-control" />
                     </div>
 
                     <div class="form-group">
-                        <label>Email</label>
-                        <input asp-for="@Model." class="form-control" />
+                        <label>Typ płatności</label>
+                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<PaymentType>(), Model.Invoice.PaymentType)
                     </div>
 
                     <div class="form-group">
                         <label>Ulica</label>
-                        <input asp-for="@Model." class="form-control" />
+                        <input asp-for="@Model.Invoice.DateOfIssue" type="date" class="form-control" />
                     </div>
 
                     <div class="form-group">
-                        <label>Miasto</label>
-                        <input asp-for="@Model." class="form-control" />
+                        <label>Brutto</label>
+                        <input asp-for="@Model.Invoice.PaymentWithoutTax" type="text" class="form-control" />
                     </div>
 
                     <div class="form-group">
-                        <label>Kod pocztowy</label>
-                        <input asp-for="@Model.Invoice." class="form-control" />
+                        <label>Netto</label>
+                        <input asp-for="@Model.Invoice.PaymentWithTax" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Podatek</label>
+                        <input asp-for="@Model.Invoice.TaxPayment" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Stawka</label>
+                        <input asp-for="@Model.Invoice.TaxRate" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Klient</label>
+                        <br />
+                        @Html.DropDownList("Clients", Model.Clients, Model.Invoice.Client)
+                    </div>
+
+                    <div class="form-group">
+                        <label>Zamówienie</label>
+                        <br />
+                        @Html.DropDownList("Orders", Model.Orders, Model.Invoice.Order)
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div>
-                        <label>
-                            Klient
-                        </label>
-                        <select asp-items="Model.Clients"></select>
-                    </div>
-
-                    <div>
-                        <button asp-action="AddClient">Dodaj klienta</button>
-                    </div>
-                </div>
             </section>
         </div>
     </div>

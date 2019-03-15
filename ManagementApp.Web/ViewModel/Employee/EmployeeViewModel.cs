@@ -1,4 +1,5 @@
-﻿using ManagementApp.Web.ViewModel.Protocol;
+﻿using ManagementApp.Web.ViewModel.Order;
+using ManagementApp.Web.ViewModel.Protocol;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

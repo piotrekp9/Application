@@ -1,8 +1,11 @@
 ﻿using ManagementApp.Web.Data.Enums;
+using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Invoice;
+using ManagementApp.Web.ViewModel.Protocol;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementApp.Web.ViewModel
+namespace ManagementApp.Web.ViewModel.Order
 {
     public class OrderViewModel
     {
@@ -26,5 +29,11 @@ namespace ManagementApp.Web.ViewModel
         public DateTime PlannedFinishDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime AcutalFinishDate { get; set; }
+
+        public EmployeeViewModel Employee { get; set; }
+        public ClientViewModel Client { get; set; }
+        public InvoiceViewModel Invoice { get; set; }
+        public ProductViewModel Product { get; set; }
+        public ProtocolViewModel Protocol { get; set; }
     }
 }

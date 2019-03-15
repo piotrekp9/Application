@@ -1,4 +1,5 @@
 ﻿using ManagementApp.Web.ViewModel.Invoice;
+using ManagementApp.Web.ViewModel.Order;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

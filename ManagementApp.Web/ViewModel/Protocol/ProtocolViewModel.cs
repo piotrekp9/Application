@@ -1,5 +1,6 @@
 ﻿using ManagementApp.Web.Data.Enums;
 using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Order;
 using System;
 using System.ComponentModel.DataAnnotations;
 

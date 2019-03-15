@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using ManagementApp.Web.Data.Models;
+﻿using ManagementApp.Web.Data.Models;
 using ManagementApp.Web.ViewModel.Invoice;
+using System.Collections.Generic;
 
 namespace ManagementApp.Web.Mappers
 {
@@ -24,10 +23,8 @@ namespace ManagementApp.Web.Mappers
             };
         }
 
-        public static InvoiceViewModel MapToViewModel(Invoice invoice, Order order)
+        public static InvoiceViewModel MapToViewModel(Invoice invoice, Order order, Client client)
         {
-            var mappedOrder = OrderMapper.MapToViewModel(order);
-
             return new InvoiceViewModel()
             {
                 Id = invoice.Id,
@@ -40,7 +37,8 @@ namespace ManagementApp.Web.Mappers
                 PaymentWithTax = invoice.PaymentWithTax,
                 TaxPayment = invoice.TaxPayment,
                 TaxRate = invoice.TaxRate,
-                Order = mappedOrder
+                Order = OrderMapper.MapToViewModel(order),
+                Client = ClientMapper.MapToViewModel(client)
             };
         }
 

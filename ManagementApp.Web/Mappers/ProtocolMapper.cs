@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
-using ManagementApp.Web.ViewModel;
 using ManagementApp.Web.ViewModel.Employee;
+using ManagementApp.Web.ViewModel.Order;
 using ManagementApp.Web.ViewModel.Protocol;
 
 namespace ManagementApp.Web.Mappers

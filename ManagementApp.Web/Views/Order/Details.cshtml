@@ -1,5 +1,96 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ManagementApp.Web.ViewModel.Order.OrderDetailsViewModel
+@using ManagementApp.Web.Data.Enums
 @{
+    ViewData["Title"] = "Edytuj zamówienie";
 }
+
+<h2>Edytuj zamówienie</h2>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <div class="form-group">
+                <form asp-action="Update" method="post">
+
+                    <div class="form-group">
+                        <label>Tytuł</label>
+                        <input asp-for="@Model.Order.Title" class="form-control" name="Title" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Opis</label>
+                        <input asp-for="@Model.Order.Description" class="form-control" name="Description" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <br />
+                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<OrderStatus>(), Model.Order.OrderStatus)
+                    </div>
+
+                    <div class="form-group">
+                        <label>Priorytet</label>
+                        <br />
+                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<OrderPriority>(), Model.Order.OrderPriority)
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data rozpoczęcia</label>
+                        <input asp-for="@Model.Order.StartDate" class="form-control" name="StartDate" type="date" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Planowana data zakończenia</label>
+                        <input asp-for="@Model.Order.PlannedFinishDate" class="form-control" name="PlannedFinishDate" type="date" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Faktyczna data zakończenia</label>
+                        <input asp-for="@Model.Order.AcutalFinishDate" class="form-control" name="AcutalFinishDate" type="date" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pracownik</label>
+                        <br />
+                        @Html.DropDownList("Employees", Model.Employees, Model.Order.Employee)
+                    </div>
+
+                    <div class="form-group">
+                        <label>Klient</label>
+                        <br />
+                        @Html.DropDownList("Clients", Model.Clients, Model.Order.Client)
+                    </div>
+
+                    <div class="form-group">
+                        <label>Produkt</label>
+                        <br />
+                        @Html.DropDownList("Products", Model.Products, Model.Order.Product)
+                    </div>
+
+                    <div class="form-group">
+                        <label>Protokół</label>
+                        <br />
+                        @if (Model.Order.Protocol != null)
+                        {
+                            @Html.DropDownList("Protocols", Model.Protocols, Model.Order.Protocol)
+                        }
+                        else
+                        {
+                            @Html.DropDownList("Protocols", Model.Protocols)
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label>Faktura</label>
+                        <br />
+                        @Html.DropDownList("Invoices", Model.Invoices, Model.Order.Invoice)
+                    </div>
+
+                    <button asp-action="Update" type="submit" class="form-group">Zapisz zmiany</button>
+                </form>
+                <form asp-action="Index" method="get" class="form-inline">
+                    <button asp-action="Index">Cofnij</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

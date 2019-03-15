@@ -1,4 +1,5 @@
-﻿using ManagementApp.Web.Mappers;
+﻿using ManagementApp.Web.Data.Models;
+using ManagementApp.Web.Mappers;
 using ManagementApp.Web.Models;
 using ManagementApp.Web.Services.Interfaces;
 using ManagementApp.Web.ViewModel;
@@ -12,12 +13,15 @@ namespace ManagementApp.Web.Controllers
 {
     public class InvoiceController : Controller
     {
-        private IInvoiceService invoiceService;
-        private IClientService clientService;
-        public InvoiceController(IInvoiceService invoiceService, IClientService clientService)
+        private readonly IInvoiceService invoiceService;
+        private readonly IClientService clientService;
+        private readonly IOrderService orderService;
+
+        public InvoiceController(IInvoiceService invoiceService, IClientService clientService, IOrderService orderService)
         {
             this.clientService = clientService;
             this.invoiceService = invoiceService;
+            this.orderService = orderService;
         }
 
         [HttpGet]
@@ -59,11 +63,12 @@ namespace ManagementApp.Web.Controllers
             if (id < 1) return BadRequest();
             try
             {
-                var mappedClients = clientService.GetClients();
+                var clients = clientService.GetClients();
+                var orders = orderService.GetOrders();
                 var invoice = invoiceService.GetInvoiceById(id);
-                var mappedInvoice = InvoiceMapper.MapToViewModel(invoice, invoice.Order);
+                var mappedInvoice = InvoiceMapper.MapToViewModel(invoice, invoice.Order, invoice.Client);
 
-                var details = new InvoiceDetailsViewModel(ClientMapper.MapManyToViewModel(mappedClients));
+                var details = new InvoiceDetailsViewModel(ClientMapper.MapManyToViewModel(clients), OrderMapper.MapManyToViewModel(orders));
                 details.Invoice = mappedInvoice;
 
                 return View(details);

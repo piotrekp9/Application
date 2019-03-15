@@ -1,4 +1,5 @@
 ﻿using ManagementApp.Web.Data.Enums;
+using ManagementApp.Web.ViewModel.Order;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -42,5 +43,6 @@ namespace ManagementApp.Web.ViewModel.Invoice
         public decimal TaxPayment { get; set; }
 
         public OrderViewModel Order { get; set; }
+        public ClientViewModel Client { get; set; }
     }
 }
