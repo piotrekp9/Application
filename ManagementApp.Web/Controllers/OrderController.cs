@@ -51,7 +51,14 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            var mappedEmployees = EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees());
+            var mappedClients = ClientMapper.MapManyToViewModel(clientService.GetClients());
+            var mappedProducts = ProductMapper.MapManyToViewModel(productService.GetProducts());
+
+            return View(new OrderCreateViewModel(mappedEmployees, mappedClients, mappedProducts));
+        }
 
         [HttpPost]
         public IActionResult Create(OrderViewModel order)

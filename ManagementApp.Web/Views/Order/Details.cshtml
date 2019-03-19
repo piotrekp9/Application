@@ -24,13 +24,13 @@
                     <div class="form-group">
                         <label>Status</label>
                         <br />
-                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<OrderStatus>(), Model.Order.OrderStatus)
+                        <select class="form-control" asp-items="@Html.GetEnumSelectList<OrderStatus>()" asp-for="Order.OrderStatus"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Priorytet</label>
                         <br />
-                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<OrderPriority>(), Model.Order.OrderPriority)
+                        <select class="form-control" asp-items="@Html.GetEnumSelectList<OrderPriority>()" asp-for="Order.OrderPriority"></select>
                     </div>
 
                     <div class="form-group">
@@ -51,19 +51,19 @@
                     <div class="form-group">
                         <label>Pracownik</label>
                         <br />
-                        @Html.DropDownList("Employees", Model.Employees, Model.Order.Employee)
+                        <select class="form-control" asp-items="Model.Employees" asp-for="Order.Employee"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Klient</label>
                         <br />
-                        @Html.DropDownList("Clients", Model.Clients, Model.Order.Client)
+                        <select class="form-control" asp-items="Model.Clients" asp-for="Order.Client"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Produkt</label>
                         <br />
-                        @Html.DropDownList("Products", Model.Products, Model.Order.Product)
+                        <select  class="form-control" asp-items="Model.Products" asp-for="Order.Product"></select>
                     </div>
 
                     <div class="form-group">
@@ -71,18 +71,19 @@
                         <br />
                         @if (Model.Order.Protocol != null)
                         {
-                            @Html.DropDownList("Protocols", Model.Protocols, Model.Order.Protocol)
+                            <select class="form-control" asp-items="Model.Products" asp-for="Order.Product"></select>
                         }
                         else
                         {
-                            @Html.DropDownList("Protocols", Model.Protocols)
+                            <select class="form-control" asp-items="Model.Products"></select>
                         }
                     </div>
 
                     <div class="form-group">
                         <label>Faktura</label>
                         <br />
-                        @Html.DropDownList("Invoices", Model.Invoices, Model.Order.Invoice)
+                        <select class="form-control" asp-items="Model.Invoices" asp-for="Order.Invoice"></select>
+
                     </div>
 
                     <button asp-action="Update" type="submit" class="form-group">Zapisz zmiany</button>
