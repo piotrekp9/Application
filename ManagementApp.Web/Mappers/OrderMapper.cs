@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ManagementApp.Web.Data.Models;
+using ManagementApp.Web.ViewModel.Invoice;
 using ManagementApp.Web.ViewModel.Order;
 
 namespace ManagementApp.Web.Mappers
@@ -49,7 +50,7 @@ namespace ManagementApp.Web.Mappers
 
         public static OrderViewModel MapToViewModel(Order order, Employee employee, Client client, Product product, Protocol protocol, Invoice invoice)
         {
-            return new OrderViewModel()
+            var orderVm = new OrderViewModel()
             {
                 Id = order.Id,
                 Description = order.Description,
@@ -61,10 +62,15 @@ namespace ManagementApp.Web.Mappers
                 Title = order.Title,
                 Client = ClientMapper.MapToViewModel(client),
                 Employee = EmployeeMapper.MapToViewModel(employee),
-                Invoice = InvoiceMapper.MapToViewModel(invoice),
                 Product = ProductMapper.MapToViewModel(product),
-                Protocol = ProtocolMapper.MapToViewModel(protocol)
             };
+
+            if (invoice != null)
+                orderVm.Invoice = InvoiceMapper.MapToViewModel(invoice);
+            if (protocol != null)
+                orderVm.Protocol = ProtocolMapper.MapToViewModel(protocol);
+
+            return orderVm;
         }
     }
 }

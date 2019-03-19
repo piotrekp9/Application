@@ -82,8 +82,14 @@
                     <div class="form-group">
                         <label>Faktura</label>
                         <br />
-                        <select class="form-control" asp-items="Model.Invoices" asp-for="Order.Invoice"></select>
-
+                        @if (Model.Order.Invoice != null)
+                        {
+                            <select class="form-control" asp-items="Model.Invoices" asp-for="Order.Invoice"></select>
+                        }
+                        else
+                        {
+                            <select class="form-control" asp-items="Model.Invoices"></select>
+                        }
                     </div>
 
                     <button asp-action="Update" type="submit" class="form-group">Zapisz zmiany</button>
