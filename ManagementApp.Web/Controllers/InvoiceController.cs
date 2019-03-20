@@ -38,7 +38,10 @@ namespace ManagementApp.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var mappedClients = ClientMapper.MapManyToViewModel(clientService.GetClients());
+            var mappedOrders = OrderMapper.MapManyToViewModel(orderService.GetOrders());
+
+            return View(new InvoiceCreateViewModel(mappedClients, mappedOrders));
         }
 
         [HttpPost]

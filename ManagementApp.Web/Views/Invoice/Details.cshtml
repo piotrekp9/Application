@@ -30,7 +30,7 @@
 
                     <div class="form-group">
                         <label>Typ płatności</label>
-                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<PaymentType>(), Model.Invoice.PaymentType)
+                        <select class="form-control" asp-items="@Html.GetEnumSelectList<PaymentType>()" asp-for="Invoice.PaymentType"></select>
                     </div>
 
                     <div class="form-group">
@@ -61,13 +61,13 @@
                     <div class="form-group">
                         <label>Klient</label>
                         <br />
-                        @Html.DropDownList("Clients", Model.Clients, Model.Invoice.Client)
+                        <select class="form-control" asp-items="Model.Clients" asp-for="Invoice.Client"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Zamówienie</label>
                         <br />
-                        @Html.DropDownList("Orders", Model.Orders, Model.Invoice.Order)
+                        <select class="form-control" asp-items="Model.Orders" asp-for="Invoice.Order"></select>
                     </div>
                 </div>
 

@@ -1,4 +1,6 @@
-﻿@using ManagementApp.Web.Data.Enums
+﻿@model ManagementApp.Web.ViewModel.Invoice.InvoiceCreateViewModel
+
+@using ManagementApp.Web.Data.Enums
 @{
     ViewData["Title"] = "Dodaj nową fakturę";
 }
@@ -27,7 +29,7 @@
 
                     <div class="form-group">
                         <label>Typ płatności</label>
-                        @Html.DropDownList("PaymentType", Html.GetEnumSelectList<PaymentType>())
+                        <select class="form-control" asp-items="@Html.GetEnumSelectList<PaymentType>()"></select>
                     </div>
 
                     <div class="form-group">
@@ -52,7 +54,19 @@
 
                     <div class="form-group">
                         <label>Stawka podatku</label>
-                        <input class="form-control" name="TaxPayment" type="text" value="23%" readonly="readonly"/>
+                        <input class="form-control" name="TaxPayment" type="text" value="23%" readonly="readonly" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Klient</label>
+                        <br />
+                        <select class="form-control" asp-items="Model.Clients"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Zamówienie</label>
+                        <br />
+                        <select class="form-control" asp-items="Model.Orders"></select>
                     </div>
 
                     <button asp-action="Create" type="submit" class="form-group">Dodaj</button>
