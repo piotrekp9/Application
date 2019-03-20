@@ -44,20 +44,20 @@
 
                     <div class="form-group">
                         <label>Typ kwalifikacji</label>
-                        <br />
-                        @Html.DropDownList("ProtocolType", Html.GetEnumSelectList<ProtocolType>(), Model.Protocol.ProtocolType)
+                        <br />                        
+                        <select class="form-control" asp-items="@Html.GetEnumSelectList<ProtocolType>()" asp-for="Protocol.ProtocolType"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Pracownik wystawiający</label>
                         <br />
-                        @Html.DropDownList("Employees", Model.Employees, Model.Protocol.Employee)
+                        <select class="form-control" asp-items="Model.Employees" asp-for="Protocol.Employee"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Wystawiony na zamówienie</label>
                         <br />
-                        @Html.DropDownList("Orders", Model.Orders, Model.Protocol.Order)
+                        <select class="form-control" asp-items="Model.Orders" asp-for="Protocol.Order"></select>
                     </div>
 
                     <button asp-action="Update" type="submit" class="form-group">Dodaj</button>

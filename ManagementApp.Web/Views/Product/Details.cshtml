@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label>Typ kwalifikacji</label>
                         <br />
-                        @Html.DropDownList("QualificationType", Html.GetEnumSelectList<QualificationType>(), Model.QualificationType)
+                        <select class="form-control" asp-items="@Html.GetEnumSelectList<QualificationType>()" asp-for="QualificationType"></select>
                     </div>
 
                     <button asp-action="Update" type="submit" class="form-group">Dodaj</button>

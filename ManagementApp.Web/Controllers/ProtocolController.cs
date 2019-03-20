@@ -1,7 +1,6 @@
 ﻿using ManagementApp.Web.Mappers;
 using ManagementApp.Web.Models;
 using ManagementApp.Web.Services.Interfaces;
-using ManagementApp.Web.ViewModel;
 using ManagementApp.Web.ViewModel.Protocol;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,7 +33,13 @@ namespace ManagementApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            var mappedEmployees = EmployeeMapper.MapManyToViewModel(employeeService.GetEmployees());
+            var mappedOrders = OrderMapper.MapManyToViewModel(orderService.GetOrders());
+
+            return View(new ProtocolCreateViewModel(mappedEmployees, mappedOrders));
+        }
 
         [HttpPost]
         public IActionResult Create(ProtocolViewModel protocol)
